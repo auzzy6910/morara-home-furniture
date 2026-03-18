@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Phone } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, Search, Flame } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 export default function Header() {
@@ -9,6 +9,11 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
+      {/* Flash Sale Banner */}
+      <div className="bg-gray-900 text-white text-center text-sm py-1.5 font-medium">
+        <span className="text-yellow-400">&#9889;</span> FLASH SALE: Up to 25% OFF selected furniture — Today Only! <span className="text-yellow-400">&#9889;</span>
+      </div>
+
       {/* Top bar */}
       <div className="bg-red-600 text-white text-sm py-1.5">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -38,11 +43,24 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Home</Link>
             <Link to="/shop" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Shop</Link>
+            <Link to="/flash-sales" className="text-red-600 hover:text-red-700 font-medium transition-colors flex items-center gap-1">
+              <Flame size={16} /> Flash Sales
+            </Link>
             <Link to="/about" className="text-gray-700 hover:text-red-600 font-medium transition-colors">About</Link>
             <Link to="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Contact</Link>
           </nav>
 
           <div className="flex items-center gap-4">
+            {/* Search bar */}
+            <div className="hidden lg:flex items-center bg-gray-100 rounded-lg px-3 py-2">
+              <Search size={16} className="text-gray-400 mr-2" />
+              <input
+                type="text"
+                placeholder="Search furniture..."
+                className="bg-transparent text-sm text-gray-700 placeholder-gray-400 focus:outline-none w-40"
+              />
+            </div>
+
             <Link to="/cart" className="relative p-2 hover:bg-red-50 rounded-full transition-colors">
               <ShoppingCart className="text-gray-700" size={24} />
               {totalItems > 0 && (
@@ -67,6 +85,9 @@ export default function Header() {
           <nav className="md:hidden mt-3 pb-3 border-t pt-3 flex flex-col gap-3">
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Shop</Link>
+            <Link to="/flash-sales" onClick={() => setMobileMenuOpen(false)} className="text-red-600 hover:text-red-700 font-medium flex items-center gap-1">
+              <Flame size={16} /> Flash Sales
+            </Link>
             <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">About</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
           </nav>
