@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart, Star, Zap, TrendingUp, Award, Sparkles } from 'lucide-react';
 import { Product, formatPrice } from '../data/products';
 import { useCart } from '../context/CartContext';
 
@@ -23,9 +23,29 @@ export default function ProductCard({ product }: ProductCardProps) {
             -{product.discount}% OFF
           </span>
         )}
-        {product.isMonthlyOffer && (
+        {product.isFlashSale && (
+          <span className="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1 animate-pulse">
+            <Zap size={10} className="fill-white" /> FLASH SALE
+          </span>
+        )}
+        {!product.isFlashSale && product.isMonthlyOffer && (
           <span className="absolute top-3 right-3 bg-white text-red-600 text-xs font-bold px-2.5 py-1 rounded border border-red-600">
             MONTHLY OFFER
+          </span>
+        )}
+        {product.isNewArrival && (
+          <span className="absolute bottom-3 left-3 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
+            <Sparkles size={10} /> NEW
+          </span>
+        )}
+        {product.isBestSeller && !product.isNewArrival && (
+          <span className="absolute bottom-3 left-3 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
+            <Award size={10} /> BEST SELLER
+          </span>
+        )}
+        {product.isTrending && !product.isNewArrival && !product.isBestSeller && (
+          <span className="absolute bottom-3 left-3 bg-purple-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
+            <TrendingUp size={10} /> TRENDING
           </span>
         )}
       </Link>

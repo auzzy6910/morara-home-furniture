@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Star, ChevronRight, Minus, Plus, Truck, Shield, RotateCcw } from 'lucide-react';
+import { ShoppingCart, Star, ChevronRight, Minus, Plus, Truck, Shield, RotateCcw, CheckCircle, ThumbsUp } from 'lucide-react';
 import { useState } from 'react';
-import { products, formatPrice } from '../data/products';
+import { products, formatPrice, customerReviews } from '../data/products';
 import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
 
@@ -24,6 +24,8 @@ export default function ProductPage() {
   const relatedProducts = products
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
+
+  const productReviews = customerReviews.filter(r => r.productId === product.id);
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -136,6 +138,62 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
+
+      {/* Customer Reviews */}
+      <section className="mb-16">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Customer Reviews
+          </h2>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <ThumbsUp size={16} className="text-green-500" />
+            <span>{productReviews.length} verified reviews</span>
+          </div>
+        </div>
+
+        {productReviews.length > 0 ? (
+          <div className="space-y-4">
+            {productReviews.map(review => (
+              <div key={review.id} className="bg-white rounded-xl shadow-sm border p-5">
+                <div className="flex items-start gap-4">
+                  <img
+                    src={review.avatar}
+                    alt={review.name}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-gray-100"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-semibold text-gray-900 text-sm">{review.name}</span>
+                      {review.verified && (
+                        <span className="flex items-center gap-0.5 text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                          <CheckCircle size={10} /> Verified Purchase
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-0.5">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <Star
+                            key={i}
+                            size={12}
+                            className={i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-400">{new Date(review.date).toLocaleDateString('en-KE', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    </div>
+                    <p className="text-gray-600 text-sm leading-relaxed">{review.comment}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-gray-50 rounded-xl p-8 text-center">
+            <p className="text-gray-500">No reviews yet for this product. Be the first to leave a review!</p>
+          </div>
+        )}
+      </section>
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (

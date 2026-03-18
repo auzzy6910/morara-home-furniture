@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter, Youtube, CreditCard } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -66,11 +66,43 @@ export default function Footer() {
                 <span>Mon - Sat: 8AM - 6PM</span>
               </li>
             </ul>
+
+            {/* Social Media */}
+            <div className="mt-6">
+              <h4 className="text-white font-semibold mb-3">Follow Us</h4>
+              <div className="flex items-center gap-3">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-lg hover:bg-red-600 transition-colors">
+                  <Facebook size={18} />
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-lg hover:bg-red-600 transition-colors">
+                  <Instagram size={18} />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-lg hover:bg-red-600 transition-colors">
+                  <Twitter size={18} />
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-lg hover:bg-red-600 transition-colors">
+                  <Youtube size={18} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Morara Home Furniture. All rights reserved.</p>
+        {/* Payment Methods */}
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <CreditCard size={16} className="text-gray-500" />
+              <span className="text-xs text-gray-500">We accept:</span>
+              <div className="flex items-center gap-2">
+                <span className="bg-green-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">M-PESA</span>
+                <span className="bg-blue-700 text-white text-[9px] font-bold px-2 py-0.5 rounded">VISA</span>
+                <span className="bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded">MASTERCARD</span>
+                <span className="bg-gray-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">COD</span>
+              </div>
+            </div>
+            <p className="text-sm">&copy; {new Date().getFullYear()} Morara Home Furniture. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>
