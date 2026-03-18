@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart, Star, Flame } from 'lucide-react';
 import { Product, formatPrice } from '../data/products';
 import { useCart } from '../context/CartContext';
 
@@ -18,14 +18,46 @@ export default function ProductCard({ product }: ProductCardProps) {
           alt={product.name}
           className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        {product.discount && (
-          <span className="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded">
-            -{product.discount}% OFF
-          </span>
-        )}
-        {product.isMonthlyOffer && (
-          <span className="absolute top-3 right-3 bg-white text-red-600 text-xs font-bold px-2.5 py-1 rounded border border-red-600">
-            MONTHLY OFFER
+        {/* Top-left badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1">
+          {product.discount && (
+            <span className="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded">
+              -{product.discount}% OFF
+            </span>
+          )}
+          {product.isBestSeller && !product.discount && (
+            <span className="bg-yellow-500 text-white text-xs font-bold px-2.5 py-1 rounded">
+              BEST SELLER
+            </span>
+          )}
+          {product.isTrending && (
+            <span className="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">
+              TRENDING
+            </span>
+          )}
+          {product.isNew && (
+            <span className="bg-green-600 text-white text-xs font-bold px-2.5 py-1 rounded">
+              NEW
+            </span>
+          )}
+        </div>
+        {/* Top-right badges */}
+        <div className="absolute top-3 right-3 flex flex-col gap-1">
+          {product.isFlashSale && (
+            <span className="bg-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
+              <Flame size={12} /> FLASH SALE
+            </span>
+          )}
+          {product.isMonthlyOffer && !product.isFlashSale && (
+            <span className="bg-white text-red-600 text-xs font-bold px-2.5 py-1 rounded border border-red-600">
+              MONTHLY OFFER
+            </span>
+          )}
+        </div>
+        {/* Bottom-left best seller badge when there's also a discount */}
+        {product.isBestSeller && product.discount && (
+          <span className="absolute bottom-3 left-3 bg-yellow-500 text-white text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1">
+            &#9830; BEST SELLER
           </span>
         )}
       </Link>

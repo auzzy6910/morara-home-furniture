@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import FlashSalesPage from './pages/FlashSalesPage'
 import { CartProvider } from './context/CartContext'
 
 function App() {
@@ -23,9 +25,11 @@ function App() {
               <Route path="/cart" element={<CartPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/flash-sales" element={<FlashSalesPage />} />
             </Routes>
           </main>
           <Footer />
+          <WhatsAppButton />
         </div>
       </Router>
     </CartProvider>

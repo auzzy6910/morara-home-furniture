@@ -1,11 +1,36 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Truck, Shield, Headphones, Timer } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Headphones, Timer, Flame, Lock, MapPin, Award, ShieldCheck, ShoppingCart } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products } from '../data/products';
+import { products, formatPrice } from '../data/products';
+import { useCart } from '../context/CartContext';
 
 export default function HomePage() {
   const monthlyOffers = products.filter(p => p.isMonthlyOffer);
   const featuredProducts = products.slice(0, 4);
+  const flashSaleProducts = products.filter(p => p.isFlashSale);
+  const bestSellers = products.filter(p => p.isBestSeller);
+  const trending = products.filter(p => p.isTrending || p.isNew);
+  const { addToCart } = useCart();
+
+  // Countdown timer
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+      const diff = endOfDay.getTime() - now.getTime();
+      return {
+        hours: Math.floor(diff / (1000 * 60 * 60)),
+        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((diff % (1000 * 60)) / 1000),
+      };
+    };
+    setTimeLeft(calculateTimeLeft());
+    const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div>
@@ -125,8 +150,78 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Flash Sale / Lightning Deals Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+              <Flame size={16} /> FLASH SALE — TODAY ONLY
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Lightning Deals
+            </h2>
+            <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
+              Grab these incredible deals before time runs out. Limited stock available!
+            </p>
+            {/* Countdown */}
+            <div className="flex items-center justify-center gap-2 mt-6">
+              <span className="text-sm text-gray-500">Ends in</span>
+              <div className="flex items-center gap-1">
+                <span className="bg-gray-900 text-white text-lg font-bold px-3 py-1.5 rounded">{String(timeLeft.hours).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-500">Hours</span>
+                <span className="text-gray-900 font-bold">:</span>
+                <span className="bg-gray-900 text-white text-lg font-bold px-3 py-1.5 rounded">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-500">Minutes</span>
+                <span className="text-gray-900 font-bold">:</span>
+                <span className="bg-gray-900 text-white text-lg font-bold px-3 py-1.5 rounded">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                <span className="text-xs text-gray-500">Seconds</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {flashSaleProducts.map(product => (
+              <div key={product.id} className="bg-white border rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <Link to={`/product/${product.id}`} className="block relative">
+                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+                  {product.discount && (
+                    <span className="absolute top-3 left-3 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">
+                      -{product.discount}%
+                    </span>
+                  )}
+                </Link>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-2">{product.name}</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-lg font-bold text-red-600">{formatPrice(product.price)}</span>
+                    {product.originalPrice && (
+                      <span className="text-sm text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="w-full bg-red-600 text-white py-2.5 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <ShoppingCart size={16} /> Add to Cart
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              to="/flash-sales"
+              className="inline-flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+            >
+              View All Flash Deals <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Products */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between mb-10">
             <div>
@@ -156,6 +251,58 @@ export default function HomePage() {
             >
               View All Products <ArrowRight size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Best Sellers */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Top Rated</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Best Sellers
+              </h2>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+            >
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {bestSellers.slice(0, 3).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trending Now */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Popular</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Trending Now
+              </h2>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+            >
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {trending.slice(0, 3).map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
@@ -190,6 +337,56 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Badges */}
+      <section className="py-12 bg-gray-50 border-t border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <h3 className="text-lg font-semibold text-gray-700">Trusted by thousands of Kenyan homeowners</h3>
+            <p className="text-sm text-gray-500 mt-1">Shop with confidence — secure payments, quality guaranteed</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+              <span className="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1 rounded mb-2">M-PESA</span>
+              <p className="text-sm text-gray-600">Accepted</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+              <span className="inline-block bg-blue-700 text-white text-xs font-bold px-3 py-1 rounded mb-2">VISA</span>
+              <p className="text-sm text-gray-600">Accepted</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+              <span className="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded mb-2">MASTERCARD</span>
+              <p className="text-sm text-gray-600">Accepted</p>
+            </div>
+            <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+              <span className="inline-block bg-yellow-600 text-white text-xs font-bold px-3 py-1 rounded mb-2">MORARA PAY</span>
+              <p className="text-sm text-gray-600">Accepted</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Shield size={18} className="text-green-600" />
+              <span>Pay on Delivery</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Lock size={18} className="text-green-600" />
+              <span>Secure Checkout</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <ShieldCheck size={18} className="text-green-600" />
+              <span>SSL Encrypted</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <MapPin size={18} className="text-green-600" />
+              <span>Nationwide Delivery</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Award size={18} className="text-green-600" />
+              <span>2-Year Warranty</span>
+            </div>
           </div>
         </div>
       </section>
