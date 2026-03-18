@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Truck, Shield, Headphones, Timer } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Headphones, Timer, TrendingUp, Award } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import FlashSaleBanner from '../components/FlashSaleBanner';
+import CustomerTestimonials from '../components/CustomerTestimonials';
+import TrustBadges from '../components/TrustBadges';
 import { products } from '../data/products';
 
 export default function HomePage() {
   const monthlyOffers = products.filter(p => p.isMonthlyOffer);
   const featuredProducts = products.slice(0, 4);
+  const bestSellers = products.filter(p => p.isBestSeller);
+  const trendingProducts = products.filter(p => p.isTrending);
 
   return (
     <div>
@@ -125,6 +130,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Flash Sale Section */}
+      <FlashSaleBanner />
+
       {/* Featured Products */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
@@ -156,6 +164,60 @@ export default function HomePage() {
             >
               View All Products <ArrowRight size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Best Sellers */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-amber-600 font-semibold text-sm uppercase tracking-widest flex items-center gap-1">
+                <Award size={14} /> Top Rated
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Best <span className="text-red-600">Sellers</span>
+              </h2>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+            >
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {bestSellers.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trending Now */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <span className="text-purple-600 font-semibold text-sm uppercase tracking-widest flex items-center gap-1">
+                <TrendingUp size={14} /> Popular
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Trending <span className="text-red-600">Now</span>
+              </h2>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors"
+            >
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {trendingProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
@@ -193,6 +255,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Customer Testimonials */}
+      <CustomerTestimonials />
+
+      {/* Trust Badges */}
+      <TrustBadges />
 
       {/* Newsletter */}
       <section className="py-16 bg-gray-900 text-white">
