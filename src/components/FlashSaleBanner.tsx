@@ -34,11 +34,15 @@ export default function FlashSaleBanner() {
   const pad = (n: number) => n.toString().padStart(2, '0');
 
   return (
-    <section className="py-12 bg-gray-900 relative overflow-hidden">
-      {/* Animated background */}
+    <section className="py-16 relative overflow-hidden min-h-[600px]">
+      {/* Background image */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <img
+          src="/flash-sale-bg.png"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -87,7 +91,7 @@ export default function FlashSaleBanner() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
                   <Zap size={10} className="fill-yellow-400 text-yellow-400" />
