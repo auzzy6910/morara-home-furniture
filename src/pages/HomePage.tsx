@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Truck, Shield, Headphones, Timer } from 'lucide-react';
+import { ArrowRight, Truck, ShieldCheck, Wrench, PackageCheck } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 
@@ -47,35 +47,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Strip */}
+      {/* Features Strip - Real delivery & service signs */}
       <section className="bg-red-600 text-white py-6">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="flex items-center gap-3">
-            <Truck size={28} className="shrink-0" />
+            <div className="bg-white/20 rounded-full p-2 shrink-0">
+              <Truck size={24} />
+            </div>
             <div>
-              <p className="font-semibold text-sm">Free Delivery</p>
-              <p className="text-red-200 text-xs">Orders over KSh 50,000</p>
+              <p className="font-semibold text-sm">Nationwide Delivery</p>
+              <p className="text-red-200 text-xs">Shipped across Kenya within 3-7 days</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Shield size={28} className="shrink-0" />
+            <div className="bg-white/20 rounded-full p-2 shrink-0">
+              <ShieldCheck size={24} />
+            </div>
             <div>
-              <p className="font-semibold text-sm">Quality Guarantee</p>
-              <p className="text-red-200 text-xs">Premium materials</p>
+              <p className="font-semibold text-sm">2-Year Warranty</p>
+              <p className="text-red-200 text-xs">Manufacturer-backed guarantee</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Headphones size={28} className="shrink-0" />
+            <div className="bg-white/20 rounded-full p-2 shrink-0">
+              <Wrench size={24} />
+            </div>
             <div>
-              <p className="font-semibold text-sm">24/7 Support</p>
-              <p className="text-red-200 text-xs">Always here to help</p>
+              <p className="font-semibold text-sm">Free Assembly</p>
+              <p className="text-red-200 text-xs">Professional in-home setup included</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Timer size={28} className="shrink-0" />
+            <div className="bg-white/20 rounded-full p-2 shrink-0">
+              <PackageCheck size={24} />
+            </div>
             <div>
-              <p className="font-semibold text-sm">Fast Assembly</p>
-              <p className="text-red-200 text-xs">Professional setup</p>
+              <p className="font-semibold text-sm">14-Day Returns</p>
+              <p className="text-red-200 text-xs">Hassle-free return policy</p>
             </div>
           </div>
         </div>

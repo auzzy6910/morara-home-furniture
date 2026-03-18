@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Star, ChevronRight, Minus, Plus, Truck, Shield, RotateCcw } from 'lucide-react';
+import { ShoppingCart, Star, ChevronRight, Minus, Plus, Truck, ShieldCheck, PackageCheck } from 'lucide-react';
 import { useState } from 'react';
 import { products, formatPrice } from '../data/products';
 import { useCart } from '../context/CartContext';
@@ -119,19 +119,28 @@ export default function ProductPage() {
             Add to Cart — {formatPrice(product.price * quantity)}
           </button>
 
-          {/* Features */}
+          {/* Features - Real delivery & service signs */}
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <Truck size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">Free Delivery</p>
+              <div className="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1">
+                <Truck size={20} className="text-green-600" />
+              </div>
+              <p className="text-xs font-semibold text-gray-800">Nationwide Delivery</p>
+              <p className="text-[10px] text-gray-500">3-7 business days</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <Shield size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">2 Year Warranty</p>
+              <div className="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1">
+                <ShieldCheck size={20} className="text-blue-600" />
+              </div>
+              <p className="text-xs font-semibold text-gray-800">2-Year Warranty</p>
+              <p className="text-[10px] text-gray-500">Manufacturer backed</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <RotateCcw size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">Easy Returns</p>
+              <div className="bg-orange-100 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-1">
+                <PackageCheck size={20} className="text-orange-600" />
+              </div>
+              <p className="text-xs font-semibold text-gray-800">14-Day Returns</p>
+              <p className="text-[10px] text-gray-500">Hassle-free policy</p>
             </div>
           </div>
         </div>
