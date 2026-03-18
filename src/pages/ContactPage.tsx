@@ -128,6 +128,47 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Map Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Find Us</span>
+            <h2 className="text-3xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Our Location — <span className="text-red-600">Utawala, Nairobi</span>
+            </h2>
+            <p className="text-gray-600 mt-3 max-w-lg mx-auto">
+              Visit our showroom in Utawala, Nairobi. We're easily accessible and ready to welcome you.
+            </p>
+          </div>
+          <div className="rounded-xl overflow-hidden shadow-lg">
+            <iframe
+              title="Morara Home Furniture Location - Utawala, Nairobi"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=36.9400%2C-1.3000%2C36.9900%2C-1.2700&layer=mapnik&marker=-1.2833%2C36.9633"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="bg-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2 text-gray-700">
+                <MapPin className="text-red-600" size={18} />
+                <span className="text-sm font-medium">Utawala, Nairobi, Kenya</span>
+              </div>
+              <a
+                href="https://www.openstreetmap.org/?mlat=-1.2833&mlon=36.9633#map=15/-1.2833/36.9633"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-red-600 font-semibold hover:text-red-700 transition-colors"
+              >
+                View Larger Map →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
