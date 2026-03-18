@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Truck, Shield, Headphones, Timer, TrendingUp, Award } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import FlashSaleBanner from '../components/FlashSaleBanner';
-import CustomerTestimonials from '../components/CustomerTestimonials';
 import TrustBadges from '../components/TrustBadges';
 import { products } from '../data/products';
 
@@ -255,9 +254,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Customer Testimonials */}
-      <CustomerTestimonials />
 
       {/* Trust Badges */}
       <TrustBadges />
