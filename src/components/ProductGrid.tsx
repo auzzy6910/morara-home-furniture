@@ -35,7 +35,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   e.preventDefault();
                   addToCart(product);
                 }}
-                className="flex items-center gap-2 bg-white text-gray-900 px-6 py-2.5 rounded font-medium text-sm tracking-wide hover:bg-gray-100 transition-colors shadow-md transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                className="flex items-center gap-2 bg-white text-gray-900 px-6 py-2.5 rounded font-medium text-sm tracking-wide hover:bg-gray-100 shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
               >
                 <ShoppingCart size={16} />
                 Quick Add to Cart
