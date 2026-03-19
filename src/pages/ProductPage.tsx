@@ -1,18 +1,30 @@
 import { useParams, Link } from 'react-router-dom';
 import { ShoppingCart, Star, ChevronRight, Minus, Plus, Truck, Shield, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
-import { products, formatPrice } from '../data/products';
+import { formatPrice } from '../data/products';
 import { useCart } from '../context/CartContext';
 import ProductCard from '../components/ProductCard';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 
 export default function ProductPage() {
   const { id } = useParams();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
-  const product = products.find(p => p.id === Number(id));
+  const product = useQuery(api.products.getById, id ? { id: id as Id<"products"> } : "skip");
+  const allProducts = useQuery(api.products.getAll) ?? [];
 
-  if (!product) {
+  if (product === undefined) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <p className="text-gray-500 text-lg">Loading...</p>
+      </div>
+    );
+  }
+
+  if (product === null) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <h2 className="text-2xl font-bold text-gray-900">Product not found</h2>
@@ -21,8 +33,8 @@ export default function ProductPage() {
     );
   }
 
-  const relatedProducts = products
-    .filter(p => p.category === product.category && p.id !== product.id)
+  const relatedProducts = allProducts
+    .filter(p => p.category === product.category && p._id !== product._id)
     .slice(0, 4);
 
   const handleAddToCart = () => {
@@ -145,7 +157,7 @@ export default function ProductPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map(p => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p._id} product={p} />
             ))}
           </div>
         </section>

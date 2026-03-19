@@ -35,8 +35,8 @@ export default function CartPage() {
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
           {items.map(({ product, quantity }) => (
-            <div key={product.id} className="bg-white rounded-xl shadow p-4 flex gap-4">
-              <Link to={`/product/${product.id}`}>
+            <div key={product._id} className="bg-white rounded-xl shadow p-4 flex gap-4">
+              <Link to={`/product/${product._id}`}>
                 <img
                   src={product.image}
                   alt={product.name}
@@ -45,7 +45,7 @@ export default function CartPage() {
               </Link>
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/product/${product._id}`}>
                     <h3 className="font-semibold text-gray-900 hover:text-red-600 transition-colors">
                       {product.name}
                     </h3>
@@ -55,14 +55,14 @@ export default function CartPage() {
                 <div className="flex items-center justify-between mt-2">
                   <div className="flex items-center border rounded-lg">
                     <button
-                      onClick={() => updateQuantity(product.id, quantity - 1)}
+                      onClick={() => updateQuantity(product._id, quantity - 1)}
                       className="p-1.5 hover:bg-gray-100 transition-colors"
                     >
                       <Minus size={14} />
                     </button>
                     <span className="px-3 text-sm font-semibold">{quantity}</span>
                     <button
-                      onClick={() => updateQuantity(product.id, quantity + 1)}
+                      onClick={() => updateQuantity(product._id, quantity + 1)}
                       className="p-1.5 hover:bg-gray-100 transition-colors"
                     >
                       <Plus size={14} />
@@ -70,7 +70,7 @@ export default function CartPage() {
                   </div>
                   <span className="font-bold text-red-600">{formatPrice(product.price * quantity)}</span>
                   <button
-                    onClick={() => removeFromCart(product.id)}
+                    onClick={() => removeFromCart(product._id)}
                     className="text-gray-400 hover:text-red-600 transition-colors p-1"
                   >
                     <Trash2 size={18} />

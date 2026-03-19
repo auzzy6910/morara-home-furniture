@@ -13,8 +13,17 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as cart from "../cart.js";
+import type * as orders from "../orders.js";
+import type * as products from "../products.js";
+import type * as seed from "../seed.js";
 
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  cart: typeof cart;
+  orders: typeof orders;
+  products: typeof products;
+  seed: typeof seed;
+}>;
 
 /**
  * A utility for referencing Convex functions in your app's public API.

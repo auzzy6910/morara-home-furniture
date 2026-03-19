@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products, categories } from '../data/products';
+import { categories } from '../data/products';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('default');
   const [showOffersOnly, setShowOffersOnly] = useState(false);
 
+  const allProducts = useQuery(api.products.getAll) ?? [];
+
   let filtered = selectedCategory === 'All'
-    ? products
-    : products.filter(p => p.category === selectedCategory);
+    ? allProducts
+    : allProducts.filter(p => p.category === selectedCategory);
 
   if (showOffersOnly) {
     filtered = filtered.filter(p => p.isMonthlyOffer);
@@ -106,7 +110,7 @@ export default function ShopPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product._id} product={product} />
               ))}
             </div>
           )}
