@@ -14,12 +14,12 @@ export default function ProductGrid({ products }: ProductGridProps) {
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
       {products.map((product) => (
         <div
-          key={product.id}
+          key={product._id}
           className="group bg-white border border-gray-100 rounded-md overflow-hidden transition-shadow duration-300 hover:shadow-lg"
         >
           {/* Image Container */}
           <Link
-            to={`/product/${product.id}`}
+            to={`/product/${product._id}`}
             className="block relative overflow-hidden aspect-[4/5]"
           >
             <img
@@ -55,7 +55,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
             <p className="text-[10px] md:text-xs text-gray-400 font-medium uppercase tracking-widest">
               {product.category}
             </p>
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product._id}`}>
               <h3 className="text-sm md:text-base font-semibold text-gray-900 leading-snug group-hover:text-gray-600 transition-colors">
                 {product.name}
               </h3>
