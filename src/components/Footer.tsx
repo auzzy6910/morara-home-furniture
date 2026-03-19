@@ -1,4 +1,5 @@
 import { Facebook, Linkedin, Twitter, Youtube, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -10,22 +11,22 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-3 uppercase tracking-wide text-sm">Need Help?</h4>
             <ul className="space-y-1.5">
-              <li><a href="#" className="hover:text-red-400 transition-colors">Chat with us</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Contact Us</a></li>
+              <li><Link to="/help-center" className="hover:text-red-400 transition-colors">Chat with us</Link></li>
+              <li><Link to="/help-center" className="hover:text-red-400 transition-colors">Help Center</Link></li>
+              <li><Link to="/contact" className="hover:text-red-400 transition-colors">Contact Us</Link></li>
             </ul>
             <h4 className="text-white font-bold mt-5 mb-3 uppercase tracking-wide text-sm">Useful Links</h4>
             <ul className="space-y-1.5">
-              <li><a href="#" className="hover:text-red-400 transition-colors">Track Your Order</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Delivery &amp; Assembly</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Showroom Locations</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Return Policy</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">How to Order</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Warranty Claims</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Bulk &amp; Corporate Orders</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Interior Design Advice</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Furniture Care Guide</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Flash Sales</a></li>
+              <li><Link to="/track-order" className="hover:text-red-400 transition-colors">Track Your Order</Link></li>
+              <li><Link to="/delivery-assembly" className="hover:text-red-400 transition-colors">Delivery &amp; Assembly</Link></li>
+              <li><Link to="/showroom-locations" className="hover:text-red-400 transition-colors">Showroom Locations</Link></li>
+              <li><Link to="/return-policy" className="hover:text-red-400 transition-colors">Return Policy</Link></li>
+              <li><Link to="/how-to-order" className="hover:text-red-400 transition-colors">How to Order</Link></li>
+              <li><Link to="/warranty-claims" className="hover:text-red-400 transition-colors">Warranty Claims</Link></li>
+              <li><Link to="/bulk-orders" className="hover:text-red-400 transition-colors">Bulk &amp; Corporate Orders</Link></li>
+              <li><Link to="/interior-design" className="hover:text-red-400 transition-colors">Interior Design Advice</Link></li>
+              <li><Link to="/furniture-care" className="hover:text-red-400 transition-colors">Furniture Care Guide</Link></li>
+              <li><Link to="/flash-sales" className="hover:text-red-400 transition-colors">Flash Sales</Link></li>
             </ul>
           </div>
 
@@ -33,15 +34,15 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-3 uppercase tracking-wide text-sm">About Morara</h4>
             <ul className="space-y-1.5">
-              <li><a href="#" className="hover:text-red-400 transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Returns &amp; Refunds Policy</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Morara Careers</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Morara Express Delivery</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Terms &amp; Conditions</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Store Credit Terms</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Privacy Notice</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Cookie Notice</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Flash Sales</a></li>
+              <li><Link to="/about" className="hover:text-red-400 transition-colors">About Us</Link></li>
+              <li><Link to="/returns-refunds" className="hover:text-red-400 transition-colors">Returns &amp; Refunds Policy</Link></li>
+              <li><Link to="/careers" className="hover:text-red-400 transition-colors">Morara Careers</Link></li>
+              <li><Link to="/express-delivery" className="hover:text-red-400 transition-colors">Morara Express Delivery</Link></li>
+              <li><Link to="/terms" className="hover:text-red-400 transition-colors">Terms &amp; Conditions</Link></li>
+              <li><Link to="/store-credit" className="hover:text-red-400 transition-colors">Store Credit Terms</Link></li>
+              <li><Link to="/privacy" className="hover:text-red-400 transition-colors">Privacy Notice</Link></li>
+              <li><Link to="/cookie-notice" className="hover:text-red-400 transition-colors">Cookie Notice</Link></li>
+              <li><Link to="/flash-sales" className="hover:text-red-400 transition-colors">Flash Sales</Link></li>
             </ul>
           </div>
 
@@ -49,10 +50,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-3 uppercase tracking-wide text-sm">Earn With Morara</h4>
             <ul className="space-y-1.5">
-              <li><a href="#" className="hover:text-red-400 transition-colors">Sell on Morara</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Vendor Hub</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Become a Design Consultant</a></li>
-              <li><a href="#" className="hover:text-red-400 transition-colors">Morara Affiliate Program</a></li>
+              <li><Link to="/sell-on-morara" className="hover:text-red-400 transition-colors">Sell on Morara</Link></li>
+              <li><Link to="/vendor-hub" className="hover:text-red-400 transition-colors">Vendor Hub</Link></li>
+              <li><Link to="/design-consultant" className="hover:text-red-400 transition-colors">Become a Design Consultant</Link></li>
+              <li><Link to="/affiliate-program" className="hover:text-red-400 transition-colors">Morara Affiliate Program</Link></li>
             </ul>
           </div>
 
@@ -60,16 +61,16 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h4 className="text-white font-bold mb-3 uppercase tracking-wide text-sm">Morara Delivery Zones</h4>
             <div className="grid grid-cols-2 gap-x-8 gap-y-1.5">
-              <span>Nairobi</span>
-              <span>Nakuru</span>
-              <span>Mombasa</span>
-              <span>Eldoret</span>
-              <span>Kisumu</span>
-              <span>Thika</span>
-              <span>Nyeri</span>
-              <span>Malindi</span>
-              <span>Nanyuki</span>
-              <span>Machakos</span>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Nairobi</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Nakuru</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Mombasa</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Eldoret</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Kisumu</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Thika</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Nyeri</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Malindi</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Nanyuki</Link>
+              <Link to="/delivery-zones" className="hover:text-red-400 transition-colors">Machakos</Link>
             </div>
           </div>
         </div>
