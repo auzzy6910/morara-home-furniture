@@ -37,7 +37,7 @@ export default function FurnitureCarePage() {
     },
     {
       icon: Wind,
-      title: 'Metal & Glass Furniture',
+      title: 'Metal and Glass Furniture',
       tips: [
         'Clean glass surfaces with a glass cleaner and soft cloth.',
         'Wipe metal frames with a damp cloth and dry thoroughly.',

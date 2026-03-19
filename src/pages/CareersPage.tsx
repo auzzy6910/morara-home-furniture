@@ -17,7 +17,7 @@ export default function CareersPage() {
     },
     {
       title: 'Delivery Driver',
-      location: 'Nairobi & Surrounding Areas',
+      location: 'Nairobi and Surrounding Areas',
       type: 'Full-Time',
       description: 'Safely deliver and assemble furniture at customer locations. Valid driving license and good physical fitness required.',
     },

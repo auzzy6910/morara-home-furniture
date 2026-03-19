@@ -29,8 +29,8 @@ export default function WarrantyPage() {
           {/* Warranty Tiers */}
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             {[
-              { years: '1 Year', category: 'Accessories & Decor', items: ['Decorative pillows', 'Lamps & lighting', 'Wall art & mirrors', 'Rugs & carpets'] },
-              { years: '3 Years', category: 'Upholstered Furniture', items: ['Sofas & couches', 'Armchairs', 'Dining chairs', 'Bed frames with fabric'] },
+              { years: '1 Year', category: 'Accessories and Decor', items: ['Decorative pillows', 'Lamps and lighting', 'Wall art and mirrors', 'Rugs and carpets'] },
+              { years: '3 Years', category: 'Upholstered Furniture', items: ['Sofas and couches', 'Armchairs', 'Dining chairs', 'Bed frames with fabric'] },
               { years: '5 Years', category: 'Solid Wood Furniture', items: ['Dining tables', 'Wooden cabinets', 'Bookshelves', 'Hardwood bed frames'] },
             ].map((tier) => (
               <div key={tier.years} className="bg-white rounded-xl p-6 shadow border border-gray-100 text-center">

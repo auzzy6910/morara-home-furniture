@@ -79,34 +79,34 @@ export default function HomePage() {
       {/* Features Strip */}
       <section className="bg-red-600 text-white py-6">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="flex items-center gap-3">
+          <Link to="/track-order" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             <Truck size={28} className="shrink-0" />
             <div>
               <p className="font-semibold text-sm">Free Delivery</p>
               <p className="text-red-200 text-xs">Orders over KSh 50,000</p>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
+          </Link>
+          <Link to="/warranty" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             <Shield size={28} className="shrink-0" />
             <div>
               <p className="font-semibold text-sm">Quality Guarantee</p>
               <p className="text-red-200 text-xs">Premium materials</p>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
+          </Link>
+          <Link to="/help-center" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             <Headphones size={28} className="shrink-0" />
             <div>
               <p className="font-semibold text-sm">24/7 Support</p>
               <p className="text-red-200 text-xs">Always here to help</p>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
+          </Link>
+          <Link to="/furniture-care" className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
             <Timer size={28} className="shrink-0" />
             <div>
               <p className="font-semibold text-sm">Fast Assembly</p>
               <p className="text-red-200 text-xs">Professional setup</p>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -116,11 +116,11 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between mb-10">
               <div>
-                <span className="text-yellow-400 font-semibold text-sm uppercase tracking-widest flex items-center gap-2">
+                <span className="text-red-500 font-semibold text-sm uppercase tracking-widest flex items-center gap-2">
                   <span className="animate-pulse text-lg">⚡</span> Ending Soon
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold mt-2 text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Flash <span className="text-yellow-400">Sales</span>
+                  Flash <span className="text-red-500">Sales</span>
                 </h2>
                 <p className="text-gray-400 mt-2 max-w-2xl">
                   Hurry up! Grab these premium pieces at huge discounts before the timer runs out.
@@ -128,7 +128,7 @@ export default function HomePage() {
               </div>
               <Link
                 to="/shop"
-                className="hidden sm:flex items-center gap-2 text-yellow-400 font-semibold hover:text-yellow-300 transition-colors"
+                className="hidden sm:flex items-center gap-2 text-red-500 font-semibold hover:text-red-400 transition-colors"
               >
                 View All <ArrowRight size={18} />
               </Link>
@@ -143,7 +143,7 @@ export default function HomePage() {
             <div className="text-center mt-8 sm:hidden">
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 text-yellow-400 font-semibold"
+                className="inline-flex items-center gap-2 text-red-500 font-semibold"
               >
                 View All Flash Sales <ArrowRight size={18} />
               </Link>
@@ -158,7 +158,7 @@ export default function HomePage() {
           <div className="text-center mb-10">
             <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Limited Time</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Monthly Offers & <span className="text-red-600">Discounts</span>
+              Monthly Offers and <span className="text-red-600">Discounts</span>
             </h2>
             <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
               Don't miss out on our exclusive monthly deals. Save big on premium furniture pieces for a limited time only!
@@ -207,7 +207,7 @@ export default function HomePage() {
                     ))}
                     
                     {/* Floating badge sticking to the furniture */}
-                    <div className="absolute top-4 -right-4 md:top-8 md:-right-6 bg-yellow-400 text-gray-900 font-black text-sm md:text-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full shadow-2xl border-4 border-white transform rotate-12 animate-pulse z-20">
+                    <div className="absolute top-4 -right-4 md:top-8 md:-right-6 bg-red-600 text-white font-black text-sm md:text-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full shadow-2xl border-4 border-white transform rotate-12 animate-pulse z-20">
                       SALE
                     </div>
                   </div>

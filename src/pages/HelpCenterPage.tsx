@@ -5,7 +5,7 @@ export default function HelpCenterPage() {
   const topics = [
     {
       icon: Truck,
-      title: 'Shipping & Delivery',
+      title: 'Shipping and Delivery',
       description: 'Learn about our delivery zones, shipping times, and tracking your order.',
       links: [
         { label: 'Track Your Order', to: '/track-order' },
@@ -14,7 +14,7 @@ export default function HelpCenterPage() {
     },
     {
       icon: RotateCcw,
-      title: 'Returns & Exchanges',
+      title: 'Returns and Exchanges',
       description: 'Find out how to return or exchange items and our refund process.',
       links: [
         { label: 'Return Policy', to: '/returns' },

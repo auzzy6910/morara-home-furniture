@@ -28,7 +28,7 @@ export default function TermsOfServicePage() {
 
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-                2. Products & Pricing
+                2. Products and Pricing
               </h2>
               <p className="text-gray-600 leading-relaxed mb-3">
                 All product descriptions, images, and prices are provided as accurately as possible. However, we reserve the right to:
@@ -46,7 +46,7 @@ export default function TermsOfServicePage() {
 
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-                3. Orders & Payment
+                3. Orders and Payment
               </h2>
               <p className="text-gray-600 leading-relaxed mb-3">
                 When you place an order through our website, it constitutes an offer to purchase. We reserve the right to accept or decline your order. Payment must be made in full before order processing begins.
@@ -75,7 +75,7 @@ export default function TermsOfServicePage() {
 
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-                5. Returns & Refunds
+                5. Returns and Refunds
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 Items may be returned within 7 days of delivery subject to our Return Policy. Please refer to our <a href="/returns" className="text-red-600 hover:underline">Returns page</a> for complete details on eligibility, process, and refund timelines.

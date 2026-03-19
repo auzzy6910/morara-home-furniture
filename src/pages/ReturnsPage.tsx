@@ -8,7 +8,7 @@ export default function ReturnsPage() {
       <section className="bg-red-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Returns & <span className="text-red-200">Exchanges</span>
+            Returns and <span className="text-red-200">Exchanges</span>
           </h1>
           <p className="text-red-100 mt-3 max-w-lg mx-auto">
             We want you to love your furniture. If you're not completely satisfied, we're here to help.
