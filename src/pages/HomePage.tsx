@@ -8,7 +8,16 @@ export default function HomePage() {
   const monthlyOffers = products.filter(p => p.isMonthlyOffer);
   const flashSales = products.filter(p => p.isFlashSale);
   const featuredProducts = products.slice(0, 4);
-  const exclusiveProducts = products.filter(p => p.discount);
+  const allProductsWithDiscount = products.filter(p => p.discount);
+
+  const [currentExclusiveSlide, setCurrentExclusiveSlide] = useState(0);
+
+  useEffect(() => {
+    const exclusiveTimer = setInterval(() => {
+      setCurrentExclusiveSlide((prev) => (prev + 1) % allProductsWithDiscount.length);
+    }, 5000);
+    return () => clearInterval(exclusiveTimer);
+  }, [allProductsWithDiscount.length]);
 
   // Array of special furniture images for the swap animation
   const promoImages = [
@@ -20,7 +29,6 @@ export default function HomePage() {
   ];
   
   const [currentPromoImage, setCurrentPromoImage] = useState(0);
-  const [activeExclusive, setActiveExclusive] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -28,13 +36,6 @@ export default function HomePage() {
     }, 4000); // changes every 4 seconds
     return () => clearInterval(timer);
   }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveExclusive((prev) => (prev + 1) % exclusiveProducts.length);
-    }, 3500);
-    return () => clearInterval(timer);
-  }, [exclusiveProducts.length]);
 
   return (
     <div>
@@ -293,159 +294,133 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Get Exclusive Offers — Animated Showcase */}
-      <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-red-600/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-12 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/30 rounded-full px-4 py-1.5 mb-4">
-              <Sparkles size={14} className="text-red-400" />
-              <span className="text-red-400 font-semibold text-xs uppercase tracking-widest">Exclusive Collection</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+      {/* Exclusive Offers Carousel */}
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 bg-white text-gray-700 text-sm font-medium px-4 py-2 rounded-full border border-gray-200 mb-4">
+              <Sparkles size={16} className="text-yellow-500" />
+              Exclusive Collection
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
               Get Exclusive <span className="text-red-500">Offers</span>
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto text-lg">
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
               Hand-picked premium furniture at unbeatable prices. Limited stock — grab yours before they're gone.
             </p>
           </div>
 
-          {/* Featured Exclusive Product — Animated Spotlight */}
-          <div className="relative mb-14">
-            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl border border-gray-700/50 overflow-hidden">
-              {exclusiveProducts.map((product, index) => (
-                <div
-                  key={product.id}
-                  className={`transition-all duration-700 ease-in-out ${
-                    index === activeExclusive
-                      ? 'opacity-100 relative'
-                      : 'opacity-0 absolute inset-0 pointer-events-none'
-                  }`}
-                >
-                  <div className="flex flex-col md:flex-row items-center gap-8 p-8 md:p-12">
-                    {/* Product Image */}
-                    <div className="flex-1 w-full md:w-auto">
-                      <div className="relative group">
-                        <div className="absolute inset-0 bg-red-600/20 rounded-2xl blur-2xl group-hover:bg-red-600/30 transition-all" />
-                        <Link to={`/product/${product.id}`}>
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
-                          />
-                        </Link>
-                        {product.discount && (
-                          <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold text-sm animate-glow-pulse">
-                            -{product.discount}% OFF
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="flex-1 text-center md:text-left">
-                      <span className="text-red-400 text-xs font-semibold uppercase tracking-widest">{product.category}</span>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-400 mb-6 leading-relaxed">
-                        {product.description}
-                      </p>
-                      <div className="flex items-center gap-4 justify-center md:justify-start mb-8">
-                        <span className="text-3xl font-bold text-red-500">{formatPrice(product.price)}</span>
-                        {product.originalPrice && (
-                          <span className="text-lg text-gray-500 line-through">{formatPrice(product.originalPrice)}</span>
-                        )}
-                      </div>
-                      <Link
-                        to={`/product/${product.id}`}
-                        className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25"
-                      >
-                        View Deal <ArrowRight size={18} />
-                      </Link>
-                    </div>
+          {/* Carousel Card */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+            {allProductsWithDiscount.map((product, index) => (
+              <div
+                key={product.id}
+                className={`${index === currentExclusiveSlide ? 'block' : 'hidden'}`}
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-1/2 relative">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 md:h-80 object-cover"
+                    />
+                    {product.discount && (
+                      <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded">
+                        -{product.discount}% OFF
+                      </span>
+                    )}
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Progress dots */}
-            <div className="flex items-center justify-center gap-2 mt-6">
-              {exclusiveProducts.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveExclusive(index)}
-                  className={`transition-all duration-300 rounded-full ${
-                    index === activeExclusive
-                      ? 'w-8 h-2 bg-red-500'
-                      : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Scrolling Ticker of Exclusive Items */}
-          <div className="relative mb-14 overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-900 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-900 to-transparent z-10" />
-            <div className="flex animate-slide-left" style={{ width: `${exclusiveProducts.length * 2 * 280}px` }}>
-              {[...exclusiveProducts, ...exclusiveProducts].map((product, index) => (
-                <Link
-                  key={`${product.id}-${index}`}
-                  to={`/product/${product.id}`}
-                  className="flex-shrink-0 w-[260px] mx-2.5 group"
-                >
-                  <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden hover:border-red-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      {product.discount && (
-                        <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
-                          -{product.discount}%
-                        </div>
+                  <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                    <p className="text-xs text-red-500 font-semibold uppercase tracking-wider mb-1">{product.category}</p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.description}</p>
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="text-2xl font-bold text-red-600">{formatPrice(product.price)}</span>
+                      {product.originalPrice && (
+                        <span className="text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
                       )}
                     </div>
-                    <div className="p-4">
-                      <p className="text-xs text-red-400 font-medium uppercase mb-1">{product.category}</p>
-                      <h4 className="font-semibold text-white text-sm mb-2 group-hover:text-red-400 transition-colors">{product.name}</h4>
-                      <div className="flex items-center gap-2">
-                        <span className="text-red-500 font-bold">{formatPrice(product.price)}</span>
-                        {product.originalPrice && (
-                          <span className="text-xs text-gray-500 line-through">{formatPrice(product.originalPrice)}</span>
-                        )}
-                      </div>
-                    </div>
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-fit"
+                    >
+                      View Deal <ArrowRight size={18} />
+                    </Link>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Newsletter Signup */}
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
-                  <Tag size={18} className="text-red-200" />
-                  <span className="text-red-200 text-xs font-semibold uppercase tracking-widest">Never Miss a Deal</span>
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+          {/* Dot Navigation */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {allProductsWithDiscount.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentExclusiveSlide(index)}
+                className={`rounded-full transition-all ${
+                  index === currentExclusiveSlide
+                    ? 'w-6 h-3 bg-red-600'
+                    : 'w-3 h-3 bg-gray-400 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Product Ticker Strip */}
+      <section className="py-8 bg-gray-900 overflow-hidden">
+        <div className="animate-ticker flex gap-6 whitespace-nowrap" style={{ width: 'max-content' }}>
+          {[...products.filter(p => p.discount), ...products.filter(p => p.discount)].map((product, index) => (
+            <Link
+              key={`${product.id}-${index}`}
+              to={`/product/${product.id}`}
+              className="flex-shrink-0 w-44 group"
+            >
+              <div className="relative rounded-lg overflow-hidden mb-2">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-44 h-28 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                {product.discount && (
+                  <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                    -{product.discount}%
+                  </span>
+                )}
+              </div>
+              <p className="text-[10px] text-red-400 font-medium uppercase">{product.category}</p>
+              <h4 className="text-white text-xs font-semibold truncate">{product.name}</h4>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className="text-red-500 text-xs font-bold">{formatPrice(product.price)}</span>
+                {product.originalPrice && (
+                  <span className="text-gray-500 text-[10px] line-through">{formatPrice(product.originalPrice)}</span>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Subscribe Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-800 rounded-full translate-y-1/2 -translate-x-1/2 opacity-20" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div>
+                <span className="inline-flex items-center gap-2 text-red-200 text-sm font-medium uppercase tracking-wider mb-3">
+                  <Tag size={16} />
+                  Never Miss a Deal
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Subscribe for Exclusive Offers
-                </h3>
-                <p className="text-red-100 mt-2 max-w-md">
+                </h2>
+                <p className="text-red-100 text-sm max-w-md">
                   Be the first to know about new arrivals, flash sales, and members-only discounts.
                 </p>
               </div>
@@ -453,9 +428,9 @@ export default function HomePage() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 md:w-64 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-red-200/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all"
+                  className="flex-1 md:w-64 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-red-200 focus:outline-none focus:border-white"
                 />
-                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0 shadow-lg">
+                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-50 transition-colors whitespace-nowrap">
                   Subscribe
                 </button>
               </form>
