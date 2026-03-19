@@ -1,14 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Phone } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, Zap } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
 export default function Header() {
   const { totalItems } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 30 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+        if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        return { hours: 2, minutes: 59, seconds: 59 }; // reset timer
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (value: number) => value.toString().padStart(2, '0');
+
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
+      {/* Flash Sale Banner */}
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center py-2 relative overflow-hidden">
+        <Link to="/shop" className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 group text-white text-sm">
+          <div className="flex items-center gap-2">
+            <Zap size={16} className="text-yellow-400 fill-yellow-400 animate-pulse" />
+            <span className="font-bold tracking-wider">FLASH SALE</span>
+            <span className="hidden sm:inline text-gray-500 ml-2">|</span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="font-medium hidden md:inline">Up to 50% OFF</span>
+            
+            <div className="flex items-center gap-1 font-mono font-bold text-xs">
+              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.hours)}</span>
+              <span className="text-gray-500">:</span>
+              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.minutes)}</span>
+              <span className="text-gray-500">:</span>
+              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.seconds)}</span>
+            </div>
+
+            <span className="hidden sm:inline text-gray-500">|</span>
+            <span className="font-bold text-yellow-400 group-hover:underline decoration-yellow-400 underline-offset-4 transition-all">
+              Shop Now
+            </span>
+          </div>
+        </Link>
+      </div>
+
       {/* Top bar */}
       <div className="bg-red-600 text-white text-sm py-1.5">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -43,6 +88,22 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
+            <SignedOut>
+              <div className="hidden md:flex items-center gap-4">
+                <SignInButton mode="modal">
+                  <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+
             <Link to="/cart" className="relative p-2 hover:bg-red-50 rounded-full transition-colors">
               <ShoppingCart className="text-gray-700" size={24} />
               {totalItems > 0 && (
@@ -69,6 +130,18 @@ export default function Header() {
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Shop</Link>
             <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">About</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
+            <SignedOut>
+              <div className="flex flex-col gap-2 mt-2">
+                <SignInButton mode="modal">
+                  <button className="text-gray-700 hover:text-red-600 font-medium text-left">Log In</button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button className="bg-red-600 hover:bg-red-700 text-white rounded font-medium text-center py-2 transition-colors">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
           </nav>
         )}
       </div>

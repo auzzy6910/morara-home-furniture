@@ -7,6 +7,7 @@ export interface Product {
   image: string;
   description: string;
   isMonthlyOffer?: boolean;
+  isFlashSale?: boolean;
   discount?: number;
   rating: number;
   reviews: number;
@@ -39,9 +40,12 @@ export const products: Product[] = [
     id: 2,
     name: 'Modern Coffee Table',
     category: 'Living Room',
-    price: 34999,
+    price: 17499,
+    originalPrice: 34999,
     image: 'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=600&h=400&fit=crop',
     description: 'Sleek and contemporary coffee table with a tempered glass top and minimalist metal legs. A perfect centerpiece for any living room.',
+    isFlashSale: true,
+    discount: 50,
     rating: 4.5,
     reviews: 89,
   },
@@ -75,9 +79,12 @@ export const products: Product[] = [
     id: 5,
     name: 'Dining Table Set (6 Seater)',
     category: 'Dining Room',
-    price: 149999,
+    price: 89999,
+    originalPrice: 149999,
     image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600&h=400&fit=crop',
     description: 'Beautiful 6-seater dining table set made from premium mahogany wood. Includes 6 matching chairs with plush seat cushions.',
+    isFlashSale: true,
+    discount: 40,
     rating: 4.6,
     reviews: 78,
   },
@@ -121,9 +128,12 @@ export const products: Product[] = [
     id: 9,
     name: 'Executive Desk',
     category: 'Office',
-    price: 79999,
+    price: 39999,
+    originalPrice: 79999,
     image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&h=400&fit=crop',
     description: 'Large executive desk with built-in cable management, 3 drawers, and a spacious work surface. Perfect for a home office.',
+    isFlashSale: true,
+    discount: 50,
     rating: 4.6,
     reviews: 112,
   },
@@ -131,9 +141,12 @@ export const products: Product[] = [
     id: 10,
     name: 'Accent Armchair',
     category: 'Living Room',
-    price: 49999,
+    price: 29999,
+    originalPrice: 49999,
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop',
     description: 'Statement accent armchair upholstered in premium fabric with wooden legs. Adds a touch of elegance to any corner.',
+    isFlashSale: true,
+    discount: 40,
     rating: 4.5,
     reviews: 88,
   },
