@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Truck, Shield, Headphones, Timer, Sparkles, Tag } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products, formatPrice } from '../data/products';
+import { formatPrice } from '../data/products';
+import { useQuery } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 export default function HomePage() {
-  const monthlyOffers = products.filter(p => p.isMonthlyOffer);
-  const flashSales = products.filter(p => p.isFlashSale);
-  const featuredProducts = products.slice(0, 4);
-  const exclusiveProducts = products.filter(p => p.discount);
+  const allProducts = useQuery(api.products.getAll) ?? [];
+  const monthlyOffers = allProducts.filter(p => p.isMonthlyOffer);
+  const flashSales = allProducts.filter(p => p.isFlashSale);
+  const featuredProducts = allProducts.slice(0, 4);
+  const exclusiveProducts = allProducts.filter(p => p.discount);
 
   // Array of special furniture images for the swap animation
   const promoImages = [
@@ -136,7 +139,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {flashSales.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product._id} product={product} />
               ))}
             </div>
 
@@ -218,7 +221,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {monthlyOffers.slice(0, 6).map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
         </div>
@@ -244,7 +247,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
 
@@ -322,7 +325,7 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-3xl border border-gray-700/50 overflow-hidden">
               {exclusiveProducts.map((product, index) => (
                 <div
-                  key={product.id}
+                  key={product._id}
                   className={`transition-all duration-700 ease-in-out ${
                     index === activeExclusive
                       ? 'opacity-100 relative'
@@ -334,7 +337,7 @@ export default function HomePage() {
                     <div className="flex-1 w-full md:w-auto">
                       <div className="relative group">
                         <div className="absolute inset-0 bg-red-600/20 rounded-2xl blur-2xl group-hover:bg-red-600/30 transition-all" />
-                        <Link to={`/product/${product.id}`}>
+                        <Link to={`/product/${product._id}`}>
                           <img
                             src={product.image}
                             alt={product.name}
@@ -365,7 +368,7 @@ export default function HomePage() {
                         )}
                       </div>
                       <Link
-                        to={`/product/${product.id}`}
+                        to={`/product/${product._id}`}
                         className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25"
                       >
                         View Deal <ArrowRight size={18} />
@@ -399,8 +402,8 @@ export default function HomePage() {
             <div className="flex animate-slide-left" style={{ width: `${exclusiveProducts.length * 2 * 280}px` }}>
               {[...exclusiveProducts, ...exclusiveProducts].map((product, index) => (
                 <Link
-                  key={`${product.id}-${index}`}
-                  to={`/product/${product.id}`}
+                  key={`${product._id}-${index}`}
+                  to={`/product/${product._id}`}
                   className="flex-shrink-0 w-[260px] mx-2.5 group"
                 >
                   <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden hover:border-red-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">

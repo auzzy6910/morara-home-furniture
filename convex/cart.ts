@@ -1,15 +1,99 @@
-import { mutation } from "./_generated/server";
+import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 /**
- * Toggle a product in the user's cart.
- * If the product is already in the cart, remove it.
- * If it's not in the cart, add it.
+ * Get the current user's cart.
  */
-export const toggleItem = mutation({
+export const get = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return null;
+    }
+    const cart = await ctx.db
+      .query("carts")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .first();
+    return cart;
+  },
+});
+
+/**
+ * Add a product to the cart or increase its quantity.
+ */
+export const addItem = mutation({
+  args: { productId: v.id("products") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized: You must be logged in to modify the cart.");
+    }
+
+    const cart = await ctx.db
+      .query("carts")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .first();
+
+    if (!cart) {
+      await ctx.db.insert("carts", {
+        clerkId: identity.subject,
+        items: [{ productId: args.productId, quantity: 1 }],
+      });
+      return;
+    }
+
+    const existingItem = cart.items.find(
+      (item) => item.productId === args.productId
+    );
+
+    if (existingItem) {
+      const updatedItems = cart.items.map((item) =>
+        item.productId === args.productId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      await ctx.db.patch(cart._id, { items: updatedItems });
+    } else {
+      await ctx.db.patch(cart._id, {
+        items: [...cart.items, { productId: args.productId, quantity: 1 }],
+      });
+    }
+  },
+});
+
+/**
+ * Remove a product from the cart.
+ */
+export const removeItem = mutation({
+  args: { productId: v.id("products") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized: You must be logged in to modify the cart.");
+    }
+
+    const cart = await ctx.db
+      .query("carts")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .first();
+
+    if (!cart) return;
+
+    const updatedItems = cart.items.filter(
+      (item) => item.productId !== args.productId
+    );
+    await ctx.db.patch(cart._id, { items: updatedItems });
+  },
+});
+
+/**
+ * Update the quantity of a product in the cart.
+ */
+export const updateQuantity = mutation({
   args: {
-    clerkId: v.string(),
     productId: v.id("products"),
+    quantity: v.number(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -17,38 +101,46 @@ export const toggleItem = mutation({
       throw new Error("Unauthorized: You must be logged in to modify the cart.");
     }
 
-    // Find the user's existing cart
-    const existingCart = await ctx.db
+    const cart = await ctx.db
       .query("carts")
-      .filter((q) => q.eq(q.field("clerkId"), args.clerkId))
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
       .first();
 
-    if (!existingCart) {
-      // No cart exists — create one with this product
-      await ctx.db.insert("carts", {
-        clerkId: args.clerkId,
-        items: [args.productId],
-      });
-      return { action: "added" };
-    }
+    if (!cart) return;
 
-    const index = existingCart.items.indexOf(args.productId);
-
-    if (index === -1) {
-      // Product not in cart — add it
-      await ctx.db.patch(existingCart._id, {
-        items: [...existingCart.items, args.productId],
-      });
-      return { action: "added" };
-    } else {
-      // Product already in cart — remove it
-      const updatedItems = existingCart.items.filter(
-        (id) => id !== args.productId
+    if (args.quantity <= 0) {
+      const updatedItems = cart.items.filter(
+        (item) => item.productId !== args.productId
       );
-      await ctx.db.patch(existingCart._id, {
-        items: updatedItems,
-      });
-      return { action: "removed" };
+      await ctx.db.patch(cart._id, { items: updatedItems });
+    } else {
+      const updatedItems = cart.items.map((item) =>
+        item.productId === args.productId
+          ? { ...item, quantity: args.quantity }
+          : item
+      );
+      await ctx.db.patch(cart._id, { items: updatedItems });
     }
+  },
+});
+
+/**
+ * Clear the entire cart.
+ */
+export const clear = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized: You must be logged in to modify the cart.");
+    }
+
+    const cart = await ctx.db
+      .query("carts")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .first();
+
+    if (!cart) return;
+    await ctx.db.patch(cart._id, { items: [] });
   },
 });
