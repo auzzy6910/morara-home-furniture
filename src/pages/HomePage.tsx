@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Truck, Shield, Headphones, Timer } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
@@ -5,7 +6,26 @@ import { products } from '../data/products';
 
 export default function HomePage() {
   const monthlyOffers = products.filter(p => p.isMonthlyOffer);
+  const flashSales = products.filter(p => p.isFlashSale);
   const featuredProducts = products.slice(0, 4);
+
+  // Array of special furniture images for the swap animation
+  const promoImages = [
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop', // Luxe Velvet Sofa
+    'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=800&h=600&fit=crop', // Modern Coffee Table
+    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&h=600&fit=crop', // Bookshelf Cabinet
+    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', // Accent Armchair
+    'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop', // Dining Table
+  ];
+  
+  const [currentPromoImage, setCurrentPromoImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentPromoImage((prev) => (prev + 1) % promoImages.length);
+    }, 4000); // changes every 4 seconds
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div>
@@ -81,6 +101,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Flash Sales Section */}
+      {flashSales.length > 0 && (
+        <section className="py-16 bg-gray-900 text-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between mb-10">
+              <div>
+                <span className="text-yellow-400 font-semibold text-sm uppercase tracking-widest flex items-center gap-2">
+                  <span className="animate-pulse text-lg">⚡</span> Ending Soon
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold mt-2 text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  Flash <span className="text-yellow-400">Sales</span>
+                </h2>
+                <p className="text-gray-400 mt-2 max-w-2xl">
+                  Hurry up! Grab these premium pieces at huge discounts before the timer runs out.
+                </p>
+              </div>
+              <Link
+                to="/shop"
+                className="hidden sm:flex items-center gap-2 text-yellow-400 font-semibold hover:text-yellow-300 transition-colors"
+              >
+                View All <ArrowRight size={18} />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {flashSales.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            <div className="text-center mt-8 sm:hidden">
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-2 text-yellow-400 font-semibold"
+              >
+                View All Flash Sales <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Monthly Offers Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
@@ -95,25 +157,53 @@ export default function HomePage() {
           </div>
 
           {/* Promo banner */}
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-12 mb-10 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-12 mb-10 text-white relative overflow-hidden mt-8">
             <div className="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full -translate-y-1/2 translate-x-1/2 opacity-30" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-800 rounded-full translate-y-1/2 -translate-x-1/2 opacity-30" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+              <div className="flex-1">
                 <p className="text-red-200 font-medium text-sm uppercase tracking-widest">March 2026 Special</p>
-                <h3 className="text-3xl md:text-4xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h3 className="text-3xl md:text-5xl font-bold mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Up to 25% OFF
                 </h3>
-                <p className="text-red-100 mt-2 max-w-md">
-                  Enjoy massive discounts on selected furniture this month. Refresh your home without breaking the bank.
+                <p className="text-red-100 mt-4 max-w-md mb-8 text-lg">
+                  Enjoy massive discounts on selected premium furniture this month. Refresh your home without breaking the bank.
                 </p>
+                <Link
+                  to="/shop"
+                  className="inline-block bg-white text-red-600 px-8 py-3.5 rounded-lg font-bold hover:bg-red-50 transition-colors shadow-lg hover:shadow-xl"
+                >
+                  View All Offers
+                </Link>
               </div>
-              <Link
-                to="/shop"
-                className="bg-white text-red-600 px-8 py-3.5 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0"
-              >
-                View All Offers
-              </Link>
+              
+              <div className="flex-1 flex justify-center md:justify-end w-full">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                  {/* Decorative ambient glow */}
+                  <div className="absolute inset-0 bg-white/30 blur-3xl rounded-full" />
+                  
+                  {/* Animated element via smooth custom CSS float animation and image swapping */}
+                  <div className="relative w-full h-full animate-float">
+                    {promoImages.map((src, index) => (
+                      <img
+                        key={index}
+                        src={src}
+                        alt={`Special Offer Furniture ${index + 1}`}
+                        className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 transition-all duration-1000 ease-in-out ${
+                          index === currentPromoImage 
+                            ? 'opacity-100 scale-100 z-10' 
+                            : 'opacity-0 scale-95 z-0'
+                        }`}
+                      />
+                    ))}
+                    
+                    {/* Floating badge sticking to the furniture */}
+                    <div className="absolute top-4 -right-4 md:top-8 md:-right-6 bg-yellow-400 text-gray-900 font-black text-sm md:text-lg w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full shadow-2xl border-4 border-white transform rotate-12 animate-pulse z-20">
+                      SALE
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
