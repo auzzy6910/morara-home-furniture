@@ -1,13 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Truck, Shield, Headphones, Timer } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Headphones, Timer, Sparkles, Tag } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products } from '../data/products';
+import { products, formatPrice } from '../data/products';
 
 export default function HomePage() {
   const monthlyOffers = products.filter(p => p.isMonthlyOffer);
   const flashSales = products.filter(p => p.isFlashSale);
   const featuredProducts = products.slice(0, 4);
+  const allProductsWithDiscount = products.filter(p => p.discount);
+
+  const [currentExclusiveSlide, setCurrentExclusiveSlide] = useState(0);
+
+  useEffect(() => {
+    const exclusiveTimer = setInterval(() => {
+      setCurrentExclusiveSlide((prev) => (prev + 1) % allProductsWithDiscount.length);
+    }, 5000);
+    return () => clearInterval(exclusiveTimer);
+  }, [allProductsWithDiscount.length]);
 
   // Array of special furniture images for the swap animation
   const promoImages = [
@@ -284,25 +294,148 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Get Exclusive <span className="text-red-500">Offers</span>
-          </h2>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
-            Subscribe to our newsletter and be the first to know about new arrivals and monthly discounts.
-          </p>
-          <form className="max-w-md mx-auto flex gap-2" onSubmit={e => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
-            />
-            <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-              Subscribe
-            </button>
-          </form>
+      {/* Exclusive Offers Carousel */}
+      <section className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 bg-white text-gray-700 text-sm font-medium px-4 py-2 rounded-full border border-gray-200 mb-4">
+              <Sparkles size={16} className="text-yellow-500" />
+              Exclusive Collection
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Get Exclusive <span className="text-red-500">Offers</span>
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+              Hand-picked premium furniture at unbeatable prices. Limited stock — grab yours before they're gone.
+            </p>
+          </div>
+
+          {/* Carousel Card */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+            {allProductsWithDiscount.map((product, index) => (
+              <div
+                key={product.id}
+                className={`${index === currentExclusiveSlide ? 'block' : 'hidden'}`}
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-1/2 relative">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 md:h-80 object-cover"
+                    />
+                    {product.discount && (
+                      <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded">
+                        -{product.discount}% OFF
+                      </span>
+                    )}
+                  </div>
+                  <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                    <p className="text-xs text-red-500 font-semibold uppercase tracking-wider mb-1">{product.category}</p>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.description}</p>
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="text-2xl font-bold text-red-600">{formatPrice(product.price)}</span>
+                      {product.originalPrice && (
+                        <span className="text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
+                      )}
+                    </div>
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors w-fit"
+                    >
+                      View Deal <ArrowRight size={18} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot Navigation */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {allProductsWithDiscount.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentExclusiveSlide(index)}
+                className={`rounded-full transition-all ${
+                  index === currentExclusiveSlide
+                    ? 'w-6 h-3 bg-red-600'
+                    : 'w-3 h-3 bg-gray-400 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Product Ticker Strip */}
+      <section className="py-8 bg-gray-900 overflow-hidden">
+        <div className="animate-ticker flex gap-6 whitespace-nowrap" style={{ width: 'max-content' }}>
+          {[...products.filter(p => p.discount), ...products.filter(p => p.discount)].map((product, index) => (
+            <Link
+              key={`${product.id}-${index}`}
+              to={`/product/${product.id}`}
+              className="flex-shrink-0 w-44 group"
+            >
+              <div className="relative rounded-lg overflow-hidden mb-2">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-44 h-28 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                {product.discount && (
+                  <span className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                    -{product.discount}%
+                  </span>
+                )}
+              </div>
+              <p className="text-[10px] text-red-400 font-medium uppercase">{product.category}</p>
+              <h4 className="text-white text-xs font-semibold truncate">{product.name}</h4>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className="text-red-500 text-xs font-bold">{formatPrice(product.price)}</span>
+                {product.originalPrice && (
+                  <span className="text-gray-500 text-[10px] line-through">{formatPrice(product.originalPrice)}</span>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Subscribe Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-red-500 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-800 rounded-full translate-y-1/2 -translate-x-1/2 opacity-20" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div>
+                <span className="inline-flex items-center gap-2 text-red-200 text-sm font-medium uppercase tracking-wider mb-3">
+                  <Tag size={16} />
+                  Never Miss a Deal
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  Subscribe for Exclusive Offers
+                </h2>
+                <p className="text-red-100 text-sm max-w-md">
+                  Be the first to know about new arrivals, flash sales, and members-only discounts.
+                </p>
+              </div>
+              <form className="flex gap-2 w-full md:w-auto" onSubmit={e => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 md:w-64 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-red-200 focus:outline-none focus:border-white"
+                />
+                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-50 transition-colors whitespace-nowrap">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </div>
