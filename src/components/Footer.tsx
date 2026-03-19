@@ -11,8 +11,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">Need Help?</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="#" className="hover:text-white transition-colors">Chat</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Help Center</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Chat</Link></li>
+              <li><Link to="/help-center" className="hover:text-white transition-colors">Help Center</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -21,10 +21,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">Useful Links</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="#" className="hover:text-white transition-colors">Track Order</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Returns</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Warranty</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Furniture Care</Link></li>
+              <li><Link to="/track-order" className="hover:text-white transition-colors">Track Order</Link></li>
+              <li><Link to="/returns" className="hover:text-white transition-colors">Returns</Link></li>
+              <li><Link to="/warranty" className="hover:text-white transition-colors">Warranty</Link></li>
+              <li><Link to="/furniture-care" className="hover:text-white transition-colors">Furniture Care</Link></li>
             </ul>
           </div>
 
@@ -32,9 +32,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">About Morara</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/about" className="hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
