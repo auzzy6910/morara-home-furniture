@@ -48,6 +48,8 @@ export default function ProductPage() {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-96 md:h-full object-cover"
           />
           {product.discount && (
@@ -97,14 +99,14 @@ export default function ProductPage() {
             <div className="flex items-center border rounded-lg">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="p-2 hover:bg-gray-100 transition-colors"
+                className="p-2.5 hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <Minus size={18} />
               </button>
               <span className="px-4 py-2 font-semibold min-w-12 text-center">{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
-                className="p-2 hover:bg-gray-100 transition-colors"
+                className="p-2.5 hover:bg-gray-100 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <Plus size={18} />
               </button>
@@ -113,7 +115,7 @@ export default function ProductPage() {
 
           <button
             onClick={handleAddToCart}
-            className="w-full bg-red-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-3 mb-8"
+            className="w-full bg-red-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-3 mb-8 min-h-[44px]"
           >
             <ShoppingCart size={22} />
             Add to Cart — {formatPrice(product.price * quantity)}

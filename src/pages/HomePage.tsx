@@ -12,11 +12,11 @@ export default function HomePage() {
 
   // Array of special furniture images for the swap animation
   const promoImages = [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop', // Luxe Velvet Sofa
-    'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=800&h=600&fit=crop', // Modern Coffee Table
-    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&h=600&fit=crop', // Bookshelf Cabinet
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', // Accent Armchair
-    'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop', // Dining Table
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop&fm=webp&q=80',
+    'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=800&h=600&fit=crop&fm=webp&q=80',
+    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&h=600&fit=crop&fm=webp&q=80',
+    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&fm=webp&q=80',
+    'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&fm=webp&q=80',
   ];
   
   const [currentPromoImage, setCurrentPromoImage] = useState(0);
@@ -44,6 +44,7 @@ export default function HomePage() {
           src="/morara-home-furniture.jpg"
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
@@ -60,13 +61,13 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/shop"
-                  className="bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center gap-2"
+                  className="bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center gap-2 min-h-[44px]"
                 >
                   Shop Now <ArrowRight size={18} />
                 </Link>
                 <Link
                   to="/about"
-                  className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors"
+                  className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors min-h-[44px] flex items-center"
                 >
                   Learn More
                 </Link>
@@ -198,6 +199,8 @@ export default function HomePage() {
                         key={index}
                         src={src}
                         alt={`Special Offer Furniture ${index + 1}`}
+                        loading="lazy"
+                        decoding="async"
                         className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 transition-all duration-1000 ease-in-out ${
                           index === currentPromoImage 
                             ? 'opacity-100 scale-100 z-10' 
@@ -281,7 +284,7 @@ export default function HomePage() {
                 to="/shop"
                 className="relative rounded-xl overflow-hidden group h-48 md:h-64"
               >
-                <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={`${cat.image}&fm=webp&q=80`} alt={cat.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="font-bold text-lg">{cat.name}</h3>
@@ -338,6 +341,8 @@ export default function HomePage() {
                           <img
                             src={product.image}
                             alt={product.name}
+                            loading="lazy"
+                            decoding="async"
                             className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
                           />
                         </Link>
@@ -366,7 +371,7 @@ export default function HomePage() {
                       </div>
                       <Link
                         to={`/product/${product.id}`}
-                        className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25"
+                        className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25 min-h-[44px]"
                       >
                         View Deal <ArrowRight size={18} />
                       </Link>
@@ -408,6 +413,8 @@ export default function HomePage() {
                       <img
                         src={product.image}
                         alt={product.name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {product.discount && (
@@ -455,7 +462,7 @@ export default function HomePage() {
                   placeholder="Enter your email"
                   className="flex-1 md:w-64 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-red-200/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all"
                 />
-                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0 shadow-lg">
+                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0 shadow-lg min-h-[44px]">
                   Subscribe
                 </button>
               </form>

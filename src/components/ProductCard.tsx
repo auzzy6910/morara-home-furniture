@@ -16,6 +16,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
+          width="600"
+          height="400"
           className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         {product.discount && (
@@ -54,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <button
             onClick={() => addToCart(product)}
-            className="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition-colors"
+            className="bg-red-600 text-white p-2.5 rounded-lg hover:bg-red-700 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
             title="Add to cart"
           >
             <ShoppingCart size={18} />
