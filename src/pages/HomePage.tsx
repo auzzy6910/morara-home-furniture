@@ -103,7 +103,7 @@ export default function HomePage() {
                     Morara Home <span className="text-red-500">Furniture</span>
                   </h1>
                   <p className="text-gray-200 text-base mb-6 leading-relaxed">
-                    Transform your living spaces with our premium quality furniture. Comfort, style, and durability \u2014 all under one roof.
+                    Transform your living spaces with our premium quality furniture. Comfort, style, and durability — all under one roof.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link to="/shop" className="bg-[#E31837] text-white px-7 py-3 rounded-lg font-semibold hover:bg-[#C4142F] transition-colors flex items-center gap-2 text-sm">
