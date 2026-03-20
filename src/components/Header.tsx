@@ -1,27 +1,14 @@
-import { useState, useEffect, type ReactNode } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X, Phone, Zap } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { SignedIn as ClerkSignedIn, SignedOut as ClerkSignedOut, SignInButton as ClerkSignInButton, SignUpButton as ClerkSignUpButton, UserButton as ClerkUserButton } from '@clerk/clerk-react';
 
 const hasClerk = !!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-// Wrapper components that render Clerk components only when Clerk is available
-function SignedIn({ children }: { children: ReactNode }) {
-  return hasClerk ? <ClerkSignedIn>{children}</ClerkSignedIn> : null;
-}
-function SignedOut({ children }: { children: ReactNode }) {
-  return hasClerk ? <ClerkSignedOut>{children}</ClerkSignedOut> : <>{children}</>;
-}
-function AuthSignInButton({ children }: { children: ReactNode }) {
-  return hasClerk ? <ClerkSignInButton mode="modal">{children}</ClerkSignInButton> : <>{children}</>;
-}
-function AuthSignUpButton({ children }: { children: ReactNode }) {
-  return hasClerk ? <ClerkSignUpButton mode="modal">{children}</ClerkSignUpButton> : <>{children}</>;
-}
-function AuthUserButton() {
-  return hasClerk ? <ClerkUserButton /> : null;
-}
+// Lazy-load the Clerk auth buttons only when Clerk key is available
+const ClerkAuthButtons = hasClerk
+  ? lazy(() => import('./ClerkAuthButtons'))
+  : null;
 
 export default function Header() {
   const { totalItems } = useCart();
@@ -107,21 +94,18 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <SignedOut>
+            {ClerkAuthButtons ? (
+              <Suspense fallback={null}>
+                <ClerkAuthButtons variant="desktop" />
+              </Suspense>
+            ) : (
               <div className="hidden md:flex items-center gap-4">
-                <AuthSignInButton>
-                  <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
-                </AuthSignInButton>
-                <AuthSignUpButton>
-                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
-                    Sign Up
-                  </button>
-                </AuthSignUpButton>
+                <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
+                <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
+                  Sign Up
+                </button>
               </div>
-            </SignedOut>
-            <SignedIn>
-              <AuthUserButton />
-            </SignedIn>
+            )}
 
             <Link to="/cart" className="relative p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
               <ShoppingCart className="text-gray-700" size={24} />
@@ -155,18 +139,18 @@ export default function Header() {
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Shop</Link>
             <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">About</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Contact</Link>
-            <SignedOut>
+            {ClerkAuthButtons ? (
+              <Suspense fallback={null}>
+                <ClerkAuthButtons variant="mobile" />
+              </Suspense>
+            ) : (
               <div className="flex flex-col gap-2 mt-2 px-3">
-                <AuthSignInButton>
-                  <button className="text-gray-700 hover:text-red-600 font-medium text-left min-h-[44px]">Log In</button>
-                </AuthSignInButton>
-                <AuthSignUpButton>
-                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium text-center py-3 transition-colors min-h-[44px]">
-                    Sign Up
-                  </button>
-                </AuthSignUpButton>
+                <button className="text-gray-700 hover:text-red-600 font-medium text-left min-h-[44px]">Log In</button>
+                <button className="bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium text-center py-3 transition-colors min-h-[44px]">
+                  Sign Up
+                </button>
               </div>
-            </SignedOut>
+            )}
           </div>
         </nav>
       </div>
