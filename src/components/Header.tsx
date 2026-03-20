@@ -94,7 +94,7 @@ export default function Header() {
                   <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
+                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2.5 transition-colors min-h-[44px]">
                     Sign Up
                   </button>
                 </SignUpButton>
@@ -104,7 +104,7 @@ export default function Header() {
               <UserButton />
             </SignedIn>
 
-            <Link to="/cart" className="relative p-2 hover:bg-red-50 rounded-full transition-colors">
+            <Link to="/cart" className="relative p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
               <ShoppingCart className="text-gray-700" size={24} />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
@@ -116,7 +116,7 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-red-50 rounded-full transition-colors"
+              className="md:hidden p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -133,10 +133,10 @@ export default function Header() {
             <SignedOut>
               <div className="flex flex-col gap-2 mt-2">
                 <SignInButton mode="modal">
-                  <button className="text-gray-700 hover:text-red-600 font-medium text-left">Log In</button>
+                  <button className="text-gray-700 hover:text-red-600 font-medium text-left min-h-[44px]">Log In</button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="bg-red-600 hover:bg-red-700 text-white rounded font-medium text-center py-2 transition-colors">
+                  <button className="bg-red-600 hover:bg-red-700 text-white rounded font-medium text-center py-2.5 transition-colors min-h-[44px]">
                     Sign Up
                   </button>
                 </SignUpButton>

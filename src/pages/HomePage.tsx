@@ -41,9 +41,12 @@ export default function HomePage() {
       {/* Hero Section with provided image */}
       <section className="relative h-screen max-h-[700px] overflow-hidden">
         <img
-          src="/morara-home-furniture.jpg"
+          src="/morara-home-furniture.webp"
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
+          fetchPriority="high"
+          width={1440}
+          height={700}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
@@ -60,13 +63,13 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/shop"
-                  className="bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center gap-2"
+                  className="bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center gap-2 min-h-[44px]"
                 >
                   Shop Now <ArrowRight size={18} />
                 </Link>
                 <Link
                   to="/about"
-                  className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors"
+                  className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors min-h-[44px]"
                 >
                   Learn More
                 </Link>
@@ -180,7 +183,7 @@ export default function HomePage() {
                 </p>
                 <Link
                   to="/shop"
-                  className="inline-block bg-white text-red-600 px-8 py-3.5 rounded-lg font-bold hover:bg-red-50 transition-colors shadow-lg hover:shadow-xl"
+                  className="inline-block bg-white text-red-600 px-8 py-3.5 rounded-lg font-bold hover:bg-red-50 transition-colors shadow-lg hover:shadow-xl min-h-[44px]"
                 >
                   View All Offers
                 </Link>
@@ -196,8 +199,11 @@ export default function HomePage() {
                     {promoImages.map((src, index) => (
                       <img
                         key={index}
-                        src={src}
+                        src={`${src}&fm=webp`}
                         alt={`Special Offer Furniture ${index + 1}`}
+                        loading="lazy"
+                        width={800}
+                        height={600}
                         className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 transition-all duration-1000 ease-in-out ${
                           index === currentPromoImage 
                             ? 'opacity-100 scale-100 z-10' 
@@ -281,7 +287,7 @@ export default function HomePage() {
                 to="/shop"
                 className="relative rounded-xl overflow-hidden group h-48 md:h-64"
               >
-                <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={`${cat.image}&fm=webp`} alt={cat.name} loading="lazy" width={400} height={300} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="font-bold text-lg">{cat.name}</h3>
@@ -336,8 +342,11 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-red-600/20 rounded-2xl blur-2xl group-hover:bg-red-600/30 transition-all" />
                         <Link to={`/product/${product.id}`}>
                           <img
-                            src={product.image}
+                            src={`${product.image}&fm=webp`}
                             alt={product.name}
+                            loading="lazy"
+                            width={800}
+                            height={600}
                             className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
                           />
                         </Link>
@@ -366,7 +375,7 @@ export default function HomePage() {
                       </div>
                       <Link
                         to={`/product/${product.id}`}
-                        className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25"
+                        className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-red-700 transition-all hover:shadow-lg hover:shadow-red-600/25 min-h-[44px]"
                       >
                         View Deal <ArrowRight size={18} />
                       </Link>
@@ -382,6 +391,7 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => setActiveExclusive(index)}
+                  aria-label={`View exclusive product ${index + 1}`}
                   className={`transition-all duration-300 rounded-full ${
                     index === activeExclusive
                       ? 'w-8 h-2 bg-red-500'
@@ -406,8 +416,11 @@ export default function HomePage() {
                   <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden hover:border-red-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
                     <div className="relative overflow-hidden">
                       <img
-                        src={product.image}
+                        src={`${product.image}&fm=webp`}
                         alt={product.name}
+                        loading="lazy"
+                        width={260}
+                        height={160}
                         className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {product.discount && (
@@ -455,7 +468,7 @@ export default function HomePage() {
                   placeholder="Enter your email"
                   className="flex-1 md:w-64 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-red-200/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all"
                 />
-                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0 shadow-lg">
+                <button className="bg-white text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors shrink-0 shadow-lg min-h-[44px]">
                   Subscribe
                 </button>
               </form>

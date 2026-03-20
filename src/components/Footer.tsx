@@ -59,19 +59,19 @@ export default function Footer() {
         <div className="border-t border-gray-800 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left side: Social Icons */}
           <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
+            <a href="#" className="w-11 h-11 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all min-w-[44px] min-h-[44px]">
               <Facebook size={18} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
+            <a href="#" className="w-11 h-11 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all min-w-[44px] min-h-[44px]">
               <Twitter size={18} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
+            <a href="#" className="w-11 h-11 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all min-w-[44px] min-h-[44px]">
               <Instagram size={18} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
+            <a href="#" className="w-11 h-11 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all min-w-[44px] min-h-[44px]">
               <Linkedin size={18} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
+            <a href="#" className="w-11 h-11 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all min-w-[44px] min-h-[44px]">
               <Youtube size={18} />
             </a>
           </div>
