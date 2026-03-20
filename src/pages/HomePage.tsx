@@ -41,7 +41,7 @@ export default function HomePage() {
       {/* Hero Section with provided image */}
       <section className="relative h-screen max-h-[700px] overflow-hidden">
         <img
-          src="/morara-home-furniture.jpg"
+          src="/morara-home-furniture.webp"
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
           fetchPriority="high"
