@@ -12,11 +12,11 @@ export default function HomePage() {
 
   // Array of special furniture images for the swap animation
   const promoImages = [
-    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop', // Luxe Velvet Sofa
-    'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=800&h=600&fit=crop', // Modern Coffee Table
-    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&h=600&fit=crop', // Bookshelf Cabinet
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop', // Accent Armchair
-    'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop', // Dining Table
+    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop&fm=webp&q=80', // Luxe Velvet Sofa
+    'https://images.unsplash.com/photo-1532372576444-dda954194ad0?w=800&h=600&fit=crop&fm=webp&q=80', // Modern Coffee Table
+    'https://images.unsplash.com/photo-1594620302200-9a762244a156?w=800&h=600&fit=crop&fm=webp&q=80', // Bookshelf Cabinet
+    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&fm=webp&q=80', // Accent Armchair
+    'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&fm=webp&q=80', // Dining Table
   ];
   
   const [currentPromoImage, setCurrentPromoImage] = useState(0);
@@ -44,6 +44,7 @@ export default function HomePage() {
           src="/morara-home-furniture.jpg"
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
@@ -134,7 +135,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {flashSales.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -198,6 +199,7 @@ export default function HomePage() {
                         key={index}
                         src={src}
                         alt={`Special Offer Furniture ${index + 1}`}
+                        loading="lazy"
                         className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 transition-all duration-1000 ease-in-out ${
                           index === currentPromoImage 
                             ? 'opacity-100 scale-100 z-10' 
@@ -216,8 +218,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {monthlyOffers.slice(0, 6).map(product => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {monthlyOffers.slice(0, 8).map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -242,7 +244,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {featuredProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -269,19 +271,19 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: 'Living Room', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop', count: 4 },
-              { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=400&h=300&fit=crop', count: 3 },
-              { name: 'Dining Room', image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=400&h=300&fit=crop', count: 1 },
-              { name: 'Office', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&h=300&fit=crop', count: 2 },
+              { name: 'Living Room', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&fm=webp&q=80', count: 4 },
+              { name: 'Bedroom', image: 'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=400&h=300&fit=crop&fm=webp&q=80', count: 3 },
+              { name: 'Dining Room', image: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=400&h=300&fit=crop&fm=webp&q=80', count: 1 },
+              { name: 'Office', image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&h=300&fit=crop&fm=webp&q=80', count: 2 },
             ].map(cat => (
               <Link
                 key={cat.name}
                 to="/shop"
                 className="relative rounded-xl overflow-hidden group h-48 md:h-64"
               >
-                <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={cat.image} alt={cat.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="font-bold text-lg">{cat.name}</h3>
@@ -338,6 +340,7 @@ export default function HomePage() {
                           <img
                             src={product.image}
                             alt={product.name}
+                            loading="lazy"
                             className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
                           />
                         </Link>
@@ -408,6 +411,7 @@ export default function HomePage() {
                       <img
                         src={product.image}
                         alt={product.name}
+                        loading="lazy"
                         className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {product.discount && (
