@@ -11,7 +11,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const { addToCart } = useCart();
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
       {products.map((product) => (
         <div
           key={product.id}
@@ -23,8 +23,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
             className="block relative overflow-hidden aspect-[4/5]"
           >
             <img
-              src={product.image}
+              src={`${product.image}&fm=webp`}
               alt={product.name}
+              loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
 
@@ -35,7 +36,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                   e.preventDefault();
                   addToCart(product);
                 }}
-                className="flex items-center gap-2 bg-white text-gray-900 px-6 py-2.5 rounded font-medium text-sm tracking-wide hover:bg-gray-100 shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+                className="flex items-center gap-2 bg-white text-gray-900 px-6 py-2.5 rounded font-medium text-sm tracking-wide hover:bg-gray-100 shadow-md transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 min-h-[44px]"
               >
                 <ShoppingCart size={16} />
                 Quick Add to Cart
@@ -76,7 +77,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
               {/* Mobile: always-visible cart button */}
               <button
                 onClick={() => addToCart(product)}
-                className="lg:hidden bg-gray-900 text-white p-2 rounded hover:bg-gray-700 transition-colors"
+                className="lg:hidden bg-gray-900 text-white p-2.5 rounded hover:bg-gray-700 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 title="Add to cart"
               >
                 <ShoppingCart size={16} />

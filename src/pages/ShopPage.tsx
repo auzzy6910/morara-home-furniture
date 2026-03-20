@@ -48,7 +48,7 @@ export default function ShopPage() {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                    className={`block w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors min-h-[44px] ${
                       selectedCategory === cat
                         ? 'bg-red-600 text-white font-medium'
                         : 'text-gray-600 hover:bg-red-50 hover:text-red-600'
