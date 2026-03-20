@@ -36,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Wishlist heart button */}
         <button
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(product.id); }}
-          className={`absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-md ${
+          className={`absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-md z-10 ${
             wishlisted ? 'bg-[#E31837] text-white' : 'bg-white/90 text-gray-500 hover:text-[#E31837]'
           }`}
         >
@@ -44,10 +44,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         </button>
 
         {/* Hover overlay with quick add */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 pointer-events-none">
           <button
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(product); }}
-            className="bg-[#E31837] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary-700"
+            className="bg-[#E31837] text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary-700 pointer-events-auto"
           >
             <ShoppingCart size={16} /> Add to Cart
           </button>
