@@ -45,6 +45,8 @@ export default function HomePage() {
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
           fetchPriority="high"
+          width={1440}
+          height={700}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
@@ -200,6 +202,8 @@ export default function HomePage() {
                         src={`${src}&fm=webp`}
                         alt={`Special Offer Furniture ${index + 1}`}
                         loading="lazy"
+                        width={800}
+                        height={600}
                         className={`absolute top-0 left-0 w-full h-full object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/20 transition-all duration-1000 ease-in-out ${
                           index === currentPromoImage 
                             ? 'opacity-100 scale-100 z-10' 
@@ -283,7 +287,7 @@ export default function HomePage() {
                 to="/shop"
                 className="relative rounded-xl overflow-hidden group h-48 md:h-64"
               >
-                <img src={`${cat.image}&fm=webp`} alt={cat.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={`${cat.image}&fm=webp`} alt={cat.name} loading="lazy" width={400} height={300} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="font-bold text-lg">{cat.name}</h3>
@@ -341,6 +345,8 @@ export default function HomePage() {
                             src={`${product.image}&fm=webp`}
                             alt={product.name}
                             loading="lazy"
+                            width={800}
+                            height={600}
                             className="relative w-full h-64 md:h-80 object-cover rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-500"
                           />
                         </Link>
@@ -385,6 +391,7 @@ export default function HomePage() {
                 <button
                   key={index}
                   onClick={() => setActiveExclusive(index)}
+                  aria-label={`View exclusive product ${index + 1}`}
                   className={`transition-all duration-300 rounded-full ${
                     index === activeExclusive
                       ? 'w-8 h-2 bg-red-500'
@@ -412,6 +419,8 @@ export default function HomePage() {
                         src={`${product.image}&fm=webp`}
                         alt={product.name}
                         loading="lazy"
+                        width={260}
+                        height={160}
                         className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       {product.discount && (
