@@ -1,8 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X, Phone, Zap } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import { SignedIn as ClerkSignedIn, SignedOut as ClerkSignedOut, SignInButton as ClerkSignInButton, SignUpButton as ClerkSignUpButton, UserButton as ClerkUserButton } from '@clerk/clerk-react';
+
+const hasClerk = !!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+// Wrapper components that render Clerk components only when Clerk is available
+function SignedIn({ children }: { children: ReactNode }) {
+  return hasClerk ? <ClerkSignedIn>{children}</ClerkSignedIn> : null;
+}
+function SignedOut({ children }: { children: ReactNode }) {
+  return hasClerk ? <ClerkSignedOut>{children}</ClerkSignedOut> : <>{children}</>;
+}
+function AuthSignInButton({ children }: { children: ReactNode }) {
+  return hasClerk ? <ClerkSignInButton mode="modal">{children}</ClerkSignInButton> : <>{children}</>;
+}
+function AuthSignUpButton({ children }: { children: ReactNode }) {
+  return hasClerk ? <ClerkSignUpButton mode="modal">{children}</ClerkSignUpButton> : <>{children}</>;
+}
+function AuthUserButton() {
+  return hasClerk ? <ClerkUserButton /> : null;
+}
 
 export default function Header() {
   const { totalItems } = useCart();
@@ -90,18 +109,18 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <SignedOut>
               <div className="hidden md:flex items-center gap-4">
-                <SignInButton mode="modal">
+                <AuthSignInButton>
                   <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
-                </SignInButton>
-                <SignUpButton mode="modal">
+                </AuthSignInButton>
+                <AuthSignUpButton>
                   <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
                     Sign Up
                   </button>
-                </SignUpButton>
+                </AuthSignUpButton>
               </div>
             </SignedOut>
             <SignedIn>
-              <UserButton />
+              <AuthUserButton />
             </SignedIn>
 
             <Link to="/cart" className="relative p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
@@ -138,14 +157,14 @@ export default function Header() {
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Contact</Link>
             <SignedOut>
               <div className="flex flex-col gap-2 mt-2 px-3">
-                <SignInButton mode="modal">
+                <AuthSignInButton>
                   <button className="text-gray-700 hover:text-red-600 font-medium text-left min-h-[44px]">Log In</button>
-                </SignInButton>
-                <SignUpButton mode="modal">
+                </AuthSignInButton>
+                <AuthSignUpButton>
                   <button className="bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium text-center py-3 transition-colors min-h-[44px]">
                     Sign Up
                   </button>
-                </SignUpButton>
+                </AuthSignUpButton>
               </div>
             </SignedOut>
           </div>
