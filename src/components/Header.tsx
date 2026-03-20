@@ -104,7 +104,7 @@ export default function Header() {
               <UserButton />
             </SignedIn>
 
-            <Link to="/cart" className="relative p-2 hover:bg-red-50 rounded-full transition-colors">
+            <Link to="/cart" className="relative p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
               <ShoppingCart className="text-gray-700" size={24} />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
@@ -116,7 +116,9 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-red-50 rounded-full transition-colors"
+              className="md:hidden p-2.5 hover:bg-red-50 rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -124,26 +126,30 @@ export default function Header() {
         </div>
 
         {/* Mobile nav */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden mt-3 pb-3 border-t pt-3 flex flex-col gap-3">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
-            <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Shop</Link>
-            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">About</Link>
-            <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
+        <nav
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="mt-3 pb-3 border-t pt-3 flex flex-col gap-1">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Home</Link>
+            <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Shop</Link>
+            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">About</Link>
+            <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 hover:bg-red-50 font-medium py-3 px-3 rounded-lg transition-colors min-h-[44px] flex items-center">Contact</Link>
             <SignedOut>
-              <div className="flex flex-col gap-2 mt-2">
+              <div className="flex flex-col gap-2 mt-2 px-3">
                 <SignInButton mode="modal">
-                  <button className="text-gray-700 hover:text-red-600 font-medium text-left">Log In</button>
+                  <button className="text-gray-700 hover:text-red-600 font-medium text-left min-h-[44px]">Log In</button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="bg-red-600 hover:bg-red-700 text-white rounded font-medium text-center py-2 transition-colors">
+                  <button className="bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium text-center py-3 transition-colors min-h-[44px]">
                     Sign Up
                   </button>
                 </SignUpButton>
               </div>
             </SignedOut>
-          </nav>
-        )}
+          </div>
+        </nav>
       </div>
     </header>
   );
