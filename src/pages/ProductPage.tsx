@@ -48,6 +48,7 @@ export default function ProductPage() {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
             className="w-full h-96 md:h-full object-cover"
           />
           {product.discount && (

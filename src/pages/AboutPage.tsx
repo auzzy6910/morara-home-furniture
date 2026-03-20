@@ -9,6 +9,7 @@ export default function AboutPage() {
           src="/morara-home-furniture.jpg"
           alt="Morara Home Furniture Store"
           className="w-full h-full object-cover"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
           <div className="text-center text-white">

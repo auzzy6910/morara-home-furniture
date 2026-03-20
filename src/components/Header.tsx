@@ -39,11 +39,11 @@ export default function Header() {
             <span className="font-medium hidden md:inline">Up to 50% OFF</span>
             
             <div className="flex items-center gap-1 font-mono font-bold text-xs">
-              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.hours)}</span>
-              <span className="text-gray-500">:</span>
-              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.minutes)}</span>
-              <span className="text-gray-500">:</span>
-              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w[24px] text-center">{formatTime(timeLeft.seconds)}</span>
+              <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700               min-w-[24px] text-center">{formatTime(timeLeft.hours)}</span>
+                            <span className="text-gray-500">:</span>
+                            <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w-[24px] text-center">{formatTime(timeLeft.minutes)}</span>
+                            <span className="text-gray-500">:</span>
+                            <span className="bg-gray-800 text-yellow-400 px-2 py-1 rounded border border-gray-700 min-w-[24px] text-center">{formatTime(timeLeft.seconds)}</span>
             </div>
 
             <span className="hidden sm:inline text-gray-500">|</span>
