@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Truck, Shield, Headphones, Timer, Sparkles, Tag } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import Testimonials from '../components/Testimonials';
 import { products, formatPrice } from '../data/products';
 
 export default function HomePage() {
@@ -432,8 +433,11 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Newsletter Signup */}
-          <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-10 relative overflow-hidden">
+              {/* Customer Testimonials */}
+              <Testimonials />
+
+              {/* Newsletter Signup */}
+              <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 md:p-10 relative overflow-hidden mt-14">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full translate-y-1/2 -translate-x-1/2" />
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
