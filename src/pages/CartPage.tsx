@@ -1,19 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
 
 export default function CartPage() {
   const { items, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <ShoppingBag size={64} className="mx-auto text-gray-300 mb-4" />
-        <h2 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <ShoppingBag size={64} className="mx-auto text-gray-300 dark:text-gray-600 mb-4" />
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
           Your cart is empty
         </h2>
-        <p className="text-gray-500 mb-6">Looks like you haven't added any furniture to your cart yet.</p>
+        <p className="text-gray-500 dark:text-gray-400 mb-6">Looks like you haven't added any furniture to your cart yet.</p>
         <Link
           to="/shop"
           className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
@@ -27,7 +28,7 @@ export default function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
         Shopping Cart
       </h1>
 
@@ -35,7 +36,7 @@ export default function CartPage() {
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-4">
           {items.map(({ product, quantity }) => (
-            <div key={product.id} className="bg-white rounded-xl shadow p-4 flex gap-4">
+            <div key={product.id} className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 flex gap-4">
               <Link to={`/product/${product.id}`}>
                 <img
                   src={product.image}
@@ -46,24 +47,24 @@ export default function CartPage() {
               <div className="flex-1 flex flex-col justify-between">
                 <div>
                   <Link to={`/product/${product.id}`}>
-                    <h3 className="font-semibold text-gray-900 hover:text-red-600 transition-colors">
+                    <h3 className="font-semibold text-gray-900 dark:text-white hover:text-red-600 transition-colors">
                       {product.name}
                     </h3>
                   </Link>
-                  <p className="text-sm text-gray-500">{product.category}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{product.category}</p>
                 </div>
                 <div className="flex items-center justify-between mt-2">
-                  <div className="flex items-center border rounded-lg">
+                  <div className="flex items-center border dark:border-gray-600 rounded-lg">
                     <button
                       onClick={() => updateQuantity(product.id, quantity - 1)}
-                      className="p-1.5 hover:bg-gray-100 transition-colors"
+                      className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="px-3 text-sm font-semibold">{quantity}</span>
+                    <span className="px-3 text-sm font-semibold text-gray-900 dark:text-white">{quantity}</span>
                     <button
                       onClick={() => updateQuantity(product.id, quantity + 1)}
-                      className="p-1.5 hover:bg-gray-100 transition-colors"
+                      className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
                     >
                       <Plus size={14} />
                     </button>
@@ -71,7 +72,7 @@ export default function CartPage() {
                   <span className="font-bold text-red-600">{formatPrice(product.price * quantity)}</span>
                   <button
                     onClick={() => removeFromCart(product.id)}
-                    className="text-gray-400 hover:text-red-600 transition-colors p-1"
+                    className="text-gray-400 dark:text-gray-500 hover:text-red-600 transition-colors p-1"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -82,20 +83,20 @@ export default function CartPage() {
         </div>
 
         {/* Order Summary */}
-        <div className="bg-white rounded-xl shadow p-6 h-fit sticky top-28">
-          <h3 className="font-bold text-lg text-gray-900 mb-4">Order Summary</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 h-fit sticky top-28">
+          <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-4">Order Summary</h3>
           <div className="space-y-3 text-sm">
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-gray-400">
               <span>Subtotal</span>
               <span>{formatPrice(totalPrice)}</span>
             </div>
-            <div className="flex justify-between text-gray-600">
+            <div className="flex justify-between text-gray-600 dark:text-gray-400">
               <span>Delivery</span>
               <span className={totalPrice >= 5000000 ? 'text-green-600 font-medium' : ''}>
                 {totalPrice >= 5000000 ? 'FREE' : formatPrice(50000)}
               </span>
             </div>
-            <div className="border-t pt-3 flex justify-between font-bold text-lg text-gray-900">
+            <div className="border-t dark:border-gray-700 pt-3 flex justify-between font-bold text-lg text-gray-900 dark:text-white">
               <span>Total</span>
               <span className="text-red-600">
                 {formatPrice(totalPrice + (totalPrice >= 5000000 ? 0 : 50000))}
@@ -104,13 +105,13 @@ export default function CartPage() {
           </div>
           <button
             className="w-full bg-red-600 text-white py-3.5 rounded-lg font-semibold mt-6 hover:bg-red-700 transition-colors"
-            onClick={() => alert('Checkout functionality coming soon!')}
+            onClick={() => navigate('/checkout')}
           >
             Proceed to Checkout
           </button>
           <button
             onClick={clearCart}
-            className="w-full text-gray-500 text-sm mt-3 hover:text-red-600 transition-colors"
+            className="w-full text-gray-500 dark:text-gray-400 text-sm mt-3 hover:text-red-600 transition-colors"
           >
             Clear Cart
           </button>

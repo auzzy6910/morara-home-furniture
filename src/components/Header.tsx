@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Phone, Zap } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, Zap, Heart, Sun, Moon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
+import { useTheme } from '../context/ThemeContext';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import SearchBar from './SearchBar';
 
 export default function Header() {
   const { totalItems } = useCart();
+  const { wishlist } = useWishlist();
+  const { isDark, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 30 });
@@ -16,7 +21,7 @@ export default function Header() {
         if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
         if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
         if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return { hours: 2, minutes: 59, seconds: 59 }; // reset timer
+        return { hours: 2, minutes: 59, seconds: 59 };
       });
     }, 1000);
     return () => clearInterval(timer);
@@ -25,7 +30,7 @@ export default function Header() {
   const formatTime = (value: number) => value.toString().padStart(2, '0');
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
       {/* Flash Sale Banner */}
       <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center py-2 relative overflow-hidden">
         <Link to="/shop" className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 group text-white text-sm">
@@ -72,7 +77,7 @@ export default function Header() {
           <Link to="/" className="flex items-center gap-2">
             <div className="bg-red-600 text-white font-bold text-xl px-3 py-1.5 rounded">M</div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
                 Morara Home
               </h1>
               <p className="text-xs text-red-600 font-medium -mt-0.5">FURNITURE</p>
@@ -80,18 +85,33 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Home</Link>
-            <Link to="/shop" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Shop</Link>
-            <Link to="/about" className="text-gray-700 hover:text-red-600 font-medium transition-colors">About</Link>
-            <Link to="/contact" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Contact</Link>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link to="/" className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium transition-colors">Home</Link>
+            <Link to="/shop" className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium transition-colors">Shop</Link>
+            <Link to="/blog" className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium transition-colors">Blog</Link>
+            <Link to="/about" className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium transition-colors">About</Link>
+            <Link to="/contact" className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium transition-colors">Contact</Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Search Bar - desktop */}
+            <div className="hidden md:block">
+              <SearchBar />
+            </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDark ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-gray-600" />}
+            </button>
+
             <SignedOut>
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-3">
                 <SignInButton mode="modal">
-                  <button className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors">Log In</button>
+                  <button className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-red-600 transition-colors">Log In</button>
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <button className="bg-red-600 hover:bg-red-700 text-white rounded-full font-medium text-sm px-4 py-2 transition-colors">
@@ -104,8 +124,19 @@ export default function Header() {
               <UserButton />
             </SignedIn>
 
-            <Link to="/cart" className="relative p-2 hover:bg-red-50 rounded-full transition-colors">
-              <ShoppingCart className="text-gray-700" size={24} />
+            {/* Wishlist */}
+            <Link to="/wishlist" className="relative p-2 hover:bg-red-50 dark:hover:bg-gray-800 rounded-full transition-colors">
+              <Heart className="text-gray-700 dark:text-gray-300" size={22} />
+              {wishlist.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                  {wishlist.length}
+                </span>
+              )}
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cart" className="relative p-2 hover:bg-red-50 dark:hover:bg-gray-800 rounded-full transition-colors">
+              <ShoppingCart className="text-gray-700 dark:text-gray-300" size={24} />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
                   {totalItems}
@@ -116,24 +147,30 @@ export default function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-red-50 rounded-full transition-colors"
+              className="md:hidden p-2 hover:bg-red-50 dark:hover:bg-gray-800 rounded-full transition-colors"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} className="text-gray-700 dark:text-gray-300" /> : <Menu size={24} className="text-gray-700 dark:text-gray-300" />}
             </button>
           </div>
         </div>
 
         {/* Mobile nav */}
         {mobileMenuOpen && (
-          <nav className="md:hidden mt-3 pb-3 border-t pt-3 flex flex-col gap-3">
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Home</Link>
-            <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Shop</Link>
-            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">About</Link>
-            <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 hover:text-red-600 font-medium">Contact</Link>
+          <nav className="md:hidden mt-3 pb-3 border-t dark:border-gray-700 pt-3 flex flex-col gap-3">
+            {/* Mobile Search */}
+            <div className="mb-2">
+              <SearchBar />
+            </div>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">Home</Link>
+            <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">Shop</Link>
+            <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">Blog</Link>
+            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">About</Link>
+            <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">Contact</Link>
+            <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)} className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium">Wishlist ({wishlist.length})</Link>
             <SignedOut>
               <div className="flex flex-col gap-2 mt-2">
                 <SignInButton mode="modal">
-                  <button className="text-gray-700 hover:text-red-600 font-medium text-left">Log In</button>
+                  <button className="text-gray-700 dark:text-gray-300 hover:text-red-600 font-medium text-left">Log In</button>
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <button className="bg-red-600 hover:bg-red-700 text-white rounded font-medium text-center py-2 transition-colors">
