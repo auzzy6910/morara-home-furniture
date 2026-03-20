@@ -16,17 +16,26 @@ if (!PUBLISHABLE_KEY) {
 const CONVEX_URL = import.meta.env.VITE_CONVEX_URL
 
 if (!CONVEX_URL) {
-  throw new Error('Add your Convex URL to the .env.local file')
+  console.warn('VITE_CONVEX_URL is not set. Convex features (backend cart, etc.) will be unavailable.')
 }
 
-const convex = new ConvexReactClient(CONVEX_URL)
+const convex = CONVEX_URL ? new ConvexReactClient(CONVEX_URL) : null
+
+function AppWithProviders() {
+  if (convex) {
+    return (
+      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+        <App />
+      </ConvexProviderWithClerk>
+    )
+  }
+  return <App />
+}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-        <App />
-      </ConvexProviderWithClerk>
+      <AppWithProviders />
     </ClerkProvider>
   </React.StrictMode>,
 )
