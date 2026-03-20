@@ -11,6 +11,8 @@ export interface Product {
   discount?: number;
   rating: number;
   reviews: number;
+  stock?: number;
+  totalStock?: number;
 }
 
 export const categories = [
@@ -35,6 +37,8 @@ export const products: Product[] = [
     discount: 25,
     rating: 4.8,
     reviews: 124,
+    stock: 8,
+    totalStock: 30,
   },
   {
     id: 2,
@@ -48,6 +52,8 @@ export const products: Product[] = [
     discount: 50,
     rating: 4.5,
     reviews: 89,
+    stock: 3,
+    totalStock: 20,
   },
   {
     id: 3,
@@ -61,6 +67,8 @@ export const products: Product[] = [
     discount: 19,
     rating: 4.9,
     reviews: 203,
+    stock: 12,
+    totalStock: 40,
   },
   {
     id: 4,
@@ -74,6 +82,8 @@ export const products: Product[] = [
     discount: 21,
     rating: 4.7,
     reviews: 156,
+    stock: 15,
+    totalStock: 50,
   },
   {
     id: 5,
@@ -87,6 +97,8 @@ export const products: Product[] = [
     discount: 40,
     rating: 4.6,
     reviews: 78,
+    stock: 5,
+    totalStock: 25,
   },
   {
     id: 6,
@@ -97,6 +109,8 @@ export const products: Product[] = [
     description: 'Stylish bookshelf with 5 tiers and closed cabinet storage at the bottom. Made from engineered wood with a walnut finish.',
     rating: 4.4,
     reviews: 67,
+    stock: 20,
+    totalStock: 35,
   },
   {
     id: 7,
@@ -110,6 +124,8 @@ export const products: Product[] = [
     discount: 20,
     rating: 4.3,
     reviews: 92,
+    stock: 18,
+    totalStock: 30,
   },
   {
     id: 8,
@@ -123,6 +139,8 @@ export const products: Product[] = [
     discount: 22,
     rating: 4.7,
     reviews: 45,
+    stock: 4,
+    totalStock: 15,
   },
   {
     id: 9,
@@ -136,6 +154,8 @@ export const products: Product[] = [
     discount: 50,
     rating: 4.6,
     reviews: 112,
+    stock: 2,
+    totalStock: 20,
   },
   {
     id: 10,
@@ -149,6 +169,8 @@ export const products: Product[] = [
     discount: 40,
     rating: 4.5,
     reviews: 88,
+    stock: 7,
+    totalStock: 25,
   },
   {
     id: 11,
@@ -159,6 +181,8 @@ export const products: Product[] = [
     description: 'Spacious 3-door wardrobe with mirror, shelving, and hanging space. Built with premium materials for long-lasting durability.',
     rating: 4.8,
     reviews: 134,
+    stock: 10,
+    totalStock: 30,
   },
   {
     id: 12,
@@ -172,6 +196,8 @@ export const products: Product[] = [
     discount: 24,
     rating: 4.4,
     reviews: 56,
+    stock: 6,
+    totalStock: 20,
   },
 ];
 

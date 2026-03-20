@@ -12,8 +12,8 @@ export default function AboutPage() {
         />
         <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>
-              About <span className="text-red-500">Us</span>
+            <h1 className="text-4xl md:text-5xl font-bold" >
+              About <span className="text-[#E31837]">Us</span>
             </h1>
             <p className="text-gray-300 mt-3 max-w-lg mx-auto">
               Crafting beautiful living spaces since 2010
@@ -26,8 +26,8 @@ export default function AboutPage() {
       <section className="py-16 max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Our Story</span>
-            <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <span className="text-[#E31837] font-semibold text-sm uppercase tracking-widest">Our Story</span>
+            <h2 className="text-3xl font-bold text-gray-900 mt-2 mb-4" >
               Quality Furniture for Every Home
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
@@ -46,32 +46,32 @@ export default function AboutPage() {
               designs, we have something for every taste and budget.
             </p>
           </div>
-          <div className="bg-red-50 rounded-2xl p-8">
+          <div className="bg-primary-50 rounded-2xl p-8">
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 shadow">
-                  <Award className="text-red-600" size={28} />
+                  <Award className="text-[#E31837]" size={28} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">15+</h3>
                 <p className="text-sm text-gray-600">Years Experience</p>
               </div>
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 shadow">
-                  <Users className="text-red-600" size={28} />
+                  <Users className="text-[#E31837]" size={28} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">10K+</h3>
                 <p className="text-sm text-gray-600">Happy Customers</p>
               </div>
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 shadow">
-                  <Home className="text-red-600" size={28} />
+                  <Home className="text-[#E31837]" size={28} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">500+</h3>
                 <p className="text-sm text-gray-600">Products</p>
               </div>
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 shadow">
-                  <Heart className="text-red-600" size={28} />
+                  <Heart className="text-[#E31837]" size={28} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">98%</h3>
                 <p className="text-sm text-gray-600">Satisfaction</p>
@@ -85,15 +85,15 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
-            <span className="text-red-600 font-semibold text-sm uppercase tracking-widest">Why Choose Us</span>
-            <h2 className="text-3xl font-bold text-gray-900 mt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <span className="text-[#E31837] font-semibold text-sm uppercase tracking-widest">Why Choose Us</span>
+            <h2 className="text-3xl font-bold text-gray-900 mt-2" >
               Our Values
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white rounded-xl p-8 shadow text-center">
-              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="text-red-600" size={28} />
+              <div className="bg-primary-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="text-[#E31837]" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Quality First</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
@@ -101,8 +101,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="bg-white rounded-xl p-8 shadow text-center">
-              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="text-red-600" size={28} />
+              <div className="bg-primary-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="text-[#E31837]" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Customer Love</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
@@ -110,8 +110,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="bg-white rounded-xl p-8 shadow text-center">
-              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Home className="text-red-600" size={28} />
+              <div className="bg-primary-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Home className="text-[#E31837]" size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Home Focused</h3>
               <p className="text-gray-600 text-sm leading-relaxed">

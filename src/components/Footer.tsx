@@ -3,109 +3,100 @@ import { Facebook, Linkedin, Twitter, Youtube, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0f1c] text-gray-400">
-      <div className="max-w-7xl mx-auto px-4 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
+    <footer className="bg-gray-900 text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
           {/* Column 1 */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">Need Help?</h4>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/contact" className="hover:text-white transition-colors">Chat</Link></li>
-              <li><Link to="/help-center" className="hover:text-white transition-colors">Help Center</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-            </ul>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="bg-[#E31837] text-white font-bold text-lg px-2.5 py-1 rounded">M</div>
+              <div>
+                <p className="text-white font-bold text-sm">Morara Home</p>
+                <p className="text-[10px] text-[#E31837] font-semibold tracking-wider">FURNITURE</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">Premium quality furniture for every room in your home. Comfort, style, and durability.</p>
+            <div className="flex items-center gap-3">
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#E31837] hover:text-white transition-all text-gray-400">
+                <Facebook size={14} />
+              </a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#E31837] hover:text-white transition-all text-gray-400">
+                <Twitter size={14} />
+              </a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#E31837] hover:text-white transition-all text-gray-400">
+                <Instagram size={14} />
+              </a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#E31837] hover:text-white transition-all text-gray-400">
+                <Linkedin size={14} />
+              </a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#E31837] hover:text-white transition-all text-gray-400">
+                <Youtube size={14} />
+              </a>
+            </div>
           </div>
 
           {/* Column 2 */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">Useful Links</h4>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/track-order" className="hover:text-white transition-colors">Track Order</Link></li>
-              <li><Link to="/returns" className="hover:text-white transition-colors">Returns</Link></li>
-              <li><Link to="/warranty" className="hover:text-white transition-colors">Warranty</Link></li>
-              <li><Link to="/furniture-care" className="hover:text-white transition-colors">Furniture Care</Link></li>
+            <h4 className="text-white font-bold uppercase tracking-wider mb-4 text-sm">Need Help?</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/contact" className="hover:text-[#E31837] transition-colors">Chat with Us</Link></li>
+              <li><Link to="/help-center" className="hover:text-[#E31837] transition-colors">Help Center</Link></li>
+              <li><Link to="/contact" className="hover:text-[#E31837] transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
           {/* Column 3 */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">About Morara</h4>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link></li>
-              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <h4 className="text-white font-bold uppercase tracking-wider mb-4 text-sm">Useful Links</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/track-order" className="hover:text-[#E31837] transition-colors">Track Order</Link></li>
+              <li><Link to="/returns" className="hover:text-[#E31837] transition-colors">Returns & Refunds</Link></li>
+              <li><Link to="/warranty" className="hover:text-[#E31837] transition-colors">Warranty</Link></li>
+              <li><Link to="/furniture-care" className="hover:text-[#E31837] transition-colors">Furniture Care</Link></li>
             </ul>
           </div>
 
           {/* Column 4 */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-sm">Delivery Zones</h4>
-            <div className="grid grid-cols-2 gap-y-4 gap-x-2 text-sm font-medium text-gray-400">
-              <span className="hover:text-white cursor-pointer transition-colors">Nairobi</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Mombasa</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Kisumu</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Nakuru</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Eldoret</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Thika</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Malindi</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Naivasha</span>
-            </div>
+            <h4 className="text-white font-bold uppercase tracking-wider mb-4 text-sm">About Morara</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/about" className="hover:text-[#E31837] transition-colors">About Us</Link></li>
+              <li><Link to="/careers" className="hover:text-[#E31837] transition-colors">Careers</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-[#E31837] transition-colors">Terms of Service</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-[#E31837] transition-colors">Privacy Policy</Link></li>
+            </ul>
           </div>
 
         </div>
 
-        {/* Bottom Row */}
-        <div className="border-t border-gray-800 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Left side: Social Icons */}
-          <div className="flex items-center gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
-              <Facebook size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
-              <Twitter size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
-              <Instagram size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
-              <Linkedin size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center hover:bg-white hover:text-[#0a0f1c] transition-all">
-              <Youtube size={18} />
-            </a>
-          </div>
-
-          {/* Right side: Payment Badges */}
-          <div className="flex items-center gap-3">
-            <div className="bg-[#4CAF50] text-white px-4 py-2 rounded-md flex items-center justify-center h-10 min-w-[80px] shadow-sm hover:opacity-90 transition-opacity cursor-pointer">
-              <span className="font-bold text-xs uppercase tracking-wider">M-Pesa</span>
-            </div>
-            <div className="bg-[#1A1F71] text-white px-4 py-2 rounded-md flex items-center justify-center h-10 min-w-[80px] shadow-sm hover:opacity-90 transition-opacity cursor-pointer">
-              <span className="font-bold text-base italic tracking-tighter">VISA</span>
-            </div>
-            <div className="bg-white px-4 py-2 rounded-md flex items-center justify-center h-10 min-w-[80px] shadow-sm hover:bg-gray-50 transition-colors cursor-pointer">
-               <div className="flex relative w-8 h-5 mx-auto -translate-x-1.5 translate-y-0.5">
-                 <div className="w-5 h-5 rounded-full bg-[#EB001B] absolute left-0 opacity-90 mix-blend-multiply"></div>
-                 <div className="w-5 h-5 rounded-full bg-[#F79E1B] absolute left-3 opacity-90 mix-blend-multiply"></div>
-               </div>
-            </div>
-            <div className="bg-gradient-to-r from-[#D4AF37] to-[#B58500] text-[#0a0f1c] px-4 py-2 rounded-md flex items-center justify-center h-10 min-w-[110px] shadow-[0_0_15px_rgba(212,175,55,0.15)] hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all cursor-pointer">
-              <span className="font-bold text-[11px] uppercase tracking-[0.2em] whitespace-nowrap">Morara Pay</span>
+        {/* Payment methods */}
+        <div className="border-t border-gray-800 pt-6 pb-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-gray-500">Payment Methods</p>
+            <div className="flex items-center gap-3">
+              <div className="bg-[#4CAF50] text-white px-3 py-1.5 rounded flex items-center justify-center h-8 min-w-[70px] shadow-sm">
+                <span className="font-bold text-xs uppercase tracking-wider">M-Pesa</span>
+              </div>
+              <div className="bg-[#1A1F71] text-white px-3 py-1.5 rounded flex items-center justify-center h-8 min-w-[70px] shadow-sm">
+                <span className="font-bold text-sm italic tracking-tighter">VISA</span>
+              </div>
+              <div className="bg-white px-3 py-1.5 rounded flex items-center justify-center h-8 min-w-[70px] shadow-sm">
+                <div className="flex relative w-7 h-4 mx-auto -translate-x-1">
+                  <div className="w-4 h-4 rounded-full bg-[#EB001B] absolute left-0 opacity-90 mix-blend-multiply"></div>
+                  <div className="w-4 h-4 rounded-full bg-[#F79E1B] absolute left-2.5 opacity-90 mix-blend-multiply"></div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-r from-[#D4AF37] to-[#B58500] text-gray-900 px-3 py-1.5 rounded flex items-center justify-center h-8 min-w-[90px] shadow-sm">
+                <span className="font-bold text-[10px] uppercase tracking-[0.15em] whitespace-nowrap">Morara Pay</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Sub-footer (Brands) */}
-        <div className="border-t border-gray-800/70 pt-8 pb-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-xs font-semibold text-gray-500 uppercase tracking-[0.25em]">
-            <span className="hover:text-gray-300 transition-colors cursor-default">Ashley Furniture</span>
-            <span className="hover:text-gray-300 transition-colors cursor-default">Ikea Style</span>
-            <span className="hover:text-gray-300 transition-colors cursor-default">Herman Miller</span>
-            <span className="hover:text-gray-300 transition-colors cursor-default">Steelcase</span>
-            <span className="hover:text-gray-300 transition-colors cursor-default">West Elm Inspired</span>
-            <span className="hover:text-gray-300 transition-colors cursor-default">Morara Exclusive</span>
-          </div>
+        {/* Copyright */}
+        <div className="border-t border-gray-800 pt-6">
+          <p className="text-center text-xs text-gray-600">&copy; {new Date().getFullYear()} Morara Home Furniture. All rights reserved.</p>
         </div>
       </div>
     </footer>

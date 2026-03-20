@@ -17,10 +17,13 @@ import CareersPage from './pages/CareersPage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import { CartProvider } from './context/CartContext'
+import { WishlistProvider } from './context/WishlistContext'
+import NewsletterModal from './components/NewsletterModal'
 
 function App() {
   return (
     <CartProvider>
+      <WishlistProvider>
       <Router>
         <div className="flex flex-col min-h-screen">
           <Header />
@@ -44,8 +47,10 @@ function App() {
           </main>
           <Footer />
           <WhatsAppFloat />
+          <NewsletterModal />
         </div>
       </Router>
+      </WishlistProvider>
     </CartProvider>
   )
 }
