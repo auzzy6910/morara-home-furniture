@@ -339,7 +339,7 @@ export default function HomePage() {
                         <div className="absolute inset-0 bg-red-600/20 rounded-2xl blur-2xl group-hover:bg-red-600/30 transition-all" />
                         <Link to={`/product/${product.id}`}>
                           <img
-                            src={`${product.image}&fm=webp&q=80`}
+                            src={product.image}
                             alt={product.name}
                             loading="lazy"
                             decoding="async"
@@ -411,7 +411,7 @@ export default function HomePage() {
                   <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden hover:border-red-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/10">
                     <div className="relative overflow-hidden">
                       <img
-                        src={`${product.image}&fm=webp&q=80`}
+                        src={product.image}
                         alt={product.name}
                         loading="lazy"
                         decoding="async"

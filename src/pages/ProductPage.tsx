@@ -46,7 +46,7 @@ export default function ProductPage() {
         {/* Product Image */}
         <div className="relative rounded-2xl overflow-hidden">
           <img
-            src={`${product.image}&fm=webp&q=80`}
+            src={product.image}
             alt={product.name}
             loading="lazy"
             decoding="async"

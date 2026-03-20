@@ -23,7 +23,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
             className="block relative overflow-hidden aspect-[4/5]"
           >
             <img
-              src={`${product.image}&fm=webp&q=80`}
+              src={product.image}
               alt={product.name}
               loading="lazy"
               decoding="async"
