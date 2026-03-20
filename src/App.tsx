@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
+import HomePage from './pages/HomePage'
 import { CartProvider } from './context/CartContext'
-
-const HomePage = lazy(() => import('./pages/HomePage'))
 const ShopPage = lazy(() => import('./pages/ShopPage'))
 const ProductPage = lazy(() => import('./pages/ProductPage'))
 const CartPage = lazy(() => import('./pages/CartPage'))
