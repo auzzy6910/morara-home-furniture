@@ -46,8 +46,9 @@ export default function ProductPage() {
         {/* Product Image */}
         <div className="relative rounded-2xl overflow-hidden">
           <img
-            src={product.image}
+            src={`${product.image}&fm=webp`}
             alt={product.name}
+            loading="lazy"
             className="w-full h-96 md:h-full object-cover"
           />
           {product.discount && (
@@ -143,7 +144,7 @@ export default function ProductPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
             Related Products
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {relatedProducts.map(p => (
               <ProductCard key={p.id} product={p} />
             ))}

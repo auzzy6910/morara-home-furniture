@@ -14,8 +14,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-300">
       <Link to={`/product/${product.id}`} className="block relative overflow-hidden">
         <img
-          src={product.image}
+          src={`${product.image}&fm=webp`}
           alt={product.name}
+          loading="lazy"
           className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         {product.discount && (
