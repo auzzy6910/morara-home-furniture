@@ -16,7 +16,7 @@ export default function ProductPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <h2 className="text-2xl font-bold text-gray-900">Product not found</h2>
-        <Link to="/shop" className="text-red-600 hover:underline mt-4 inline-block">Back to shop</Link>
+        <Link to="/shop" className="text-[#E31837] hover:underline mt-4 inline-block">Back to shop</Link>
       </div>
     );
   }
@@ -35,11 +35,11 @@ export default function ProductPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 mb-8 flex items-center gap-1">
-        <Link to="/" className="hover:text-red-600">Home</Link>
+        <Link to="/" className="hover:text-[#E31837]">Home</Link>
         <ChevronRight size={14} />
-        <Link to="/shop" className="hover:text-red-600">Shop</Link>
+        <Link to="/shop" className="hover:text-[#E31837]">Shop</Link>
         <ChevronRight size={14} />
-        <span className="text-red-600 font-medium">{product.name}</span>
+        <span className="text-[#E31837] font-medium">{product.name}</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
@@ -51,12 +51,12 @@ export default function ProductPage() {
             className="w-full h-96 md:h-full object-cover"
           />
           {product.discount && (
-            <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg">
+            <span className="absolute top-4 left-4 bg-[#E31837] text-white text-sm font-bold px-4 py-2 rounded-lg">
               -{product.discount}% OFF
             </span>
           )}
           {product.isMonthlyOffer && (
-            <span className="absolute top-4 right-4 bg-white text-red-600 text-sm font-bold px-4 py-2 rounded-lg border-2 border-red-600">
+            <span className="absolute top-4 right-4 bg-white text-[#E31837] text-sm font-bold px-4 py-2 rounded-lg border-2 border-[#E31837]">
               MONTHLY OFFER
             </span>
           )}
@@ -64,8 +64,8 @@ export default function ProductPage() {
 
         {/* Product Details */}
         <div>
-          <p className="text-red-600 text-sm font-semibold uppercase tracking-wide mb-2">{product.category}</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <p className="text-[#E31837] text-sm font-semibold uppercase tracking-wide mb-2">{product.category}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" >
             {product.name}
           </h1>
 
@@ -83,7 +83,7 @@ export default function ProductPage() {
           </div>
 
           <div className="flex items-baseline gap-3 mb-6">
-            <span className="text-3xl font-bold text-red-600">{formatPrice(product.price)}</span>
+            <span className="text-3xl font-bold text-[#E31837]">{formatPrice(product.price)}</span>
             {product.originalPrice && (
               <span className="text-xl text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
             )}
@@ -113,7 +113,7 @@ export default function ProductPage() {
 
           <button
             onClick={handleAddToCart}
-            className="w-full bg-red-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-3 mb-8"
+            className="w-full bg-[#E31837] text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-3 mb-8"
           >
             <ShoppingCart size={22} />
             Add to Cart — {formatPrice(product.price * quantity)}
@@ -122,16 +122,16 @@ export default function ProductPage() {
           {/* Features */}
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <Truck size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">Free Delivery</p>
+              <Truck size={22} className="mx-auto               text-[#E31837] mb-1" />
+                            <p className="text-xs text-gray-600">Free Delivery</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <Shield size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">2 Year Warranty</p>
+              <Shield size={22} className="mx-auto               text-[#E31837] mb-1" />
+                            <p className="text-xs text-gray-600">2 Year Warranty</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <RotateCcw size={22} className="mx-auto text-red-600 mb-1" />
-              <p className="text-xs text-gray-600">Easy Returns</p>
+              <RotateCcw size={22} className="mx-auto               text-[#E31837] mb-1" />
+                            <p className="text-xs text-gray-600">Easy Returns</p>
             </div>
           </div>
         </div>
@@ -140,8 +140,8 @@ export default function ProductPage() {
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Related Products
+          <h2 className="text-2xl font-bold text-gray-900 mb-6"           >
+                      Related Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {relatedProducts.map(p => (

@@ -10,13 +10,13 @@ export default function CartPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <ShoppingBag size={64} className="mx-auto text-gray-300 mb-4" />
-        <h2 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2" >
           Your cart is empty
         </h2>
         <p className="text-gray-500 mb-6">Looks like you haven't added any furniture to your cart yet.</p>
         <Link
           to="/shop"
-          className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-[#E31837] text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
         >
           <ArrowLeft size={18} />
           Continue Shopping
@@ -27,7 +27,7 @@ export default function CartPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8" >
         Shopping Cart
       </h1>
 
@@ -46,8 +46,8 @@ export default function CartPage() {
               <div className="flex-1 flex flex-col justify-between">
                 <div>
                   <Link to={`/product/${product.id}`}>
-                    <h3 className="font-semibold text-gray-900 hover:text-red-600 transition-colors">
-                      {product.name}
+                    <h3 className="font-semibold text-gray-900                     hover:text-[#E31837] transition-colors">
+                                          {product.name}
                     </h3>
                   </Link>
                   <p className="text-sm text-gray-500">{product.category}</p>
@@ -68,10 +68,10 @@ export default function CartPage() {
                       <Plus size={14} />
                     </button>
                   </div>
-                  <span className="font-bold text-red-600">{formatPrice(product.price * quantity)}</span>
+                  <span className="font-bold text-[#E31837]">{formatPrice(product.price * quantity)}</span>
                   <button
                     onClick={() => removeFromCart(product.id)}
-                    className="text-gray-400 hover:text-red-600 transition-colors p-1"
+                    className="text-gray-400 hover:text-[#E31837] transition-colors p-1"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -97,26 +97,26 @@ export default function CartPage() {
             </div>
             <div className="border-t pt-3 flex justify-between font-bold text-lg text-gray-900">
               <span>Total</span>
-              <span className="text-red-600">
-                {formatPrice(totalPrice + (totalPrice >= 5000000 ? 0 : 50000))}
+              <span className="              text-[#E31837]">
+                              {formatPrice(totalPrice + (totalPrice >= 5000000 ? 0 : 50000))}
               </span>
             </div>
           </div>
           <button
-            className="w-full bg-red-600 text-white py-3.5 rounded-lg font-semibold mt-6 hover:bg-red-700 transition-colors"
+            className="w-full bg-[#E31837] text-white py-3.5 rounded-lg font-semibold mt-6 hover:bg-primary-700 transition-colors"
             onClick={() => alert('Checkout functionality coming soon!')}
           >
             Proceed to Checkout
           </button>
           <button
             onClick={clearCart}
-            className="w-full text-gray-500 text-sm mt-3 hover:text-red-600 transition-colors"
-          >
+            className="w-full text-gray-500 text-sm mt-3           hover:text-[#E31837] transition-colors"
+                    >
             Clear Cart
           </button>
           <Link
             to="/shop"
-            className="block text-center text-red-600 text-sm font-medium mt-4 hover:underline"
+            className="block text-center text-[#E31837] text-sm font-medium mt-4 hover:underline"
           >
             Continue Shopping
           </Link>
